@@ -1,14 +1,15 @@
 # depslib dependency file v1.0
-1572910711 source:c:\dropbox\c_projects\realestatebase\main.c
+1572955634 source:c:\dropbox\c_projects\realestatebase\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
+	<string.h>
 	"resources.h"
 	"resourcesukr.h"
-	<locale.h>
-	"windows.h"
+	"tablesdefinition.c"
+	"commands.h"
 
-1572900614 c:\dropbox\c_projects\realestatebase\resources.h
+1572952234 c:\dropbox\c_projects\realestatebase\resources.h
 
 1572900635 source:c:\dropbox\c_projects\realestatebase\resources.c
 	<stdio.h>
@@ -22,7 +23,7 @@
 
 1572908682 c:\dropbox\c_projects\realestatebase\resourcesuk.h
 
-1572910020 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
+1572951694 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
@@ -38,5 +39,30 @@
 	<locale.h>
 	"windows.h"
 
-1572910711 c:\dropbox\c_projects\realestatebase\resourcesukr.h
+1572952243 c:\dropbox\c_projects\realestatebase\resourcesukr.h
+
+1572953023 source:c:\dropbox\c_projects\realestatebase\commands.c
+	<stdio.h>
+	<stdlib.h>
+
+1572900635 c:\dropbox\c_projects\realestatebase\resources.c
+	<stdio.h>
+	<stdlib.h>
+
+1572951694 c:\dropbox\c_projects\realestatebase\resourcesukr.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"windows.h"
+	"resources.h"
+
+1572952791 c:\dropbox\c_projects\realestatebase\commands.h
+
+1572951432 c:\dropbox\c_projects\realestatebase\commands.c
+	<stdio.h>
+	<stdlib.h>
+
+1572952867 source:c:\dropbox\c_projects\realestatebase\tablesdefinition.c
+
+1572955887 c:\dropbox\c_projects\realestatebase\tablesdefinition.c
 

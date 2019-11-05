@@ -1,13 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
+
 #include "resources.h"
 #include "resourcesukr.h"
-#include <locale.h>
-#include "windows.h"
+#include "tablesdefinition.c"
+#include "commands.h"
 
-char Language[2] = "en"; //interface language
+
+
+struct Table Tables;
+
 int MenuIndex; //index of selected menu item
+
+
+
 
 int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
 {
@@ -49,7 +57,7 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
     }
 
 
-
+    return 0;
 }
 
 
@@ -74,6 +82,9 @@ int main()
 
 
 
+    strcpy(Tables.name, "test");
+
+    printf("%s\n", Tables.name);
 
 
 
