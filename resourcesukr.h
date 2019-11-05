@@ -1,0 +1,2 @@
+void CommandLineParametersUKR();
+void TranslateToUKR();

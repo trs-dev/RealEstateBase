@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1572910711 source:c:\dropbox\c_projects\realestatebase\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"resources.h"
+	"resourcesukr.h"
+	<locale.h>
+	"windows.h"
+
+1572900614 c:\dropbox\c_projects\realestatebase\resources.h
+
+1572900635 source:c:\dropbox\c_projects\realestatebase\resources.c
+	<stdio.h>
+	<stdlib.h>
+
+1572909170 source:c:\dropbox\c_projects\realestatebase\resourcesuk.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"windows.h"
+
+1572908682 c:\dropbox\c_projects\realestatebase\resourcesuk.h
+
+1572910020 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"windows.h"
+	"resources.h"
+
+1572909996 c:\dropbox\c_projects\realestatebase\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"resources.h"
+	"resourcesukr.h"
+	<locale.h>
+	"windows.h"
+
+1572910711 c:\dropbox\c_projects\realestatebase\resourcesukr.h
+
