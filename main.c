@@ -10,7 +10,9 @@
 
 
 
-struct Table Tables;
+
+
+struct Table Tables[MaxNumberOfTables]; //main database
 
 int MenuIndex; //index of selected menu item
 
@@ -25,14 +27,15 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
     for (int ind = 1; ind <= 10; ind++)
     {
         Variant = 0;
-        char InputedText[2];
+        char InputedText[200];
+        printf(" >>> ");
         fgets(InputedText, 2, stdin);
         fflush(stdin); // clear input stream
         if(isdigit(InputedText[0]))
         {
             Variant = atoi(InputedText);
         }
-         // debug commands
+         // debug output
          /*
         printf("You enter: %d\n", InputedText);
         printf("Variant: %d\n", Variant);
@@ -80,11 +83,26 @@ int main()
     }
 
 
+    MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 3);
+
+    switch(MenuIndex)
+    {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        exit(0);
+    }
 
 
-    strcpy(Tables.name, "test");
 
-    printf("%s\n", Tables.name);
+
+
+
+    strcpy(Tables[0].name, "test");
+
+    printf("%s\n", Tables[0].name);
 
 
 
