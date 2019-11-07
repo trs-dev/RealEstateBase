@@ -5,14 +5,11 @@
 
 #include "resources.h"
 #include "resourcesukr.h"
-#include "tablesdefinition.c"
+#include "tablesdefinition.h"
 #include "commands.h"
 
 
 
-
-
-struct Table Tables[MaxNumberOfTables]; //main database
 
 int MenuIndex; //index of selected menu item
 
@@ -96,7 +93,7 @@ int main()
     }
 
 
-
+   printf("CanCreateTable %d\n", CanCreateTable());
 
 
 

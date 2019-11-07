@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1573114634 source:c:\dropbox\c_projects\realestatebase\main.c
+1573117772 source:c:\dropbox\c_projects\realestatebase\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -41,7 +41,7 @@
 
 1572952243 c:\dropbox\c_projects\realestatebase\resourcesukr.h
 
-1572983571 source:c:\dropbox\c_projects\realestatebase\commands.c
+1573116759 source:c:\dropbox\c_projects\realestatebase\commands.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -63,7 +63,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1572955887 source:c:\dropbox\c_projects\realestatebase\tablesdefinition.c
+1573115815 source:c:\dropbox\c_projects\realestatebase\tablesdefinition.c
 
-1573115815 c:\dropbox\c_projects\realestatebase\tablesdefinition.c
+1573123097 c:\dropbox\c_projects\realestatebase\tablesdefinition.c
 

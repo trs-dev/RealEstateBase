@@ -49,6 +49,7 @@
 		<Unit filename="tablesdefinition.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="tablesdefinition.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
