@@ -108,10 +108,6 @@ int main()
 
 
 
-
-
-
-
     printf("All are done!\n");
 
     return 0;

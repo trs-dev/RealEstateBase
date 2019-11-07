@@ -1,19 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-
-
-extern const int MaxNumberOfTables;
-extern enum ColumnType;
-extern union Record;
-extern struct TableColumn;
-extern struct Table;
-
-extern struct Table Tables[];
-
-
+#include "tablesdefinition.h"
 
 
 int StartWith(const char *str, const char *prefix)
