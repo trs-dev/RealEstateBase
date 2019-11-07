@@ -12,14 +12,14 @@
 
 
 int MenuIndex; //index of selected menu item
-
-
+enum NavigationPages {PageChangeLanguage, PageOperationsWithTables, PageAddTable};
+int Page = PageChangeLanguage;
 
 
 int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
 {
     int Variant = 0;
-    printf("%s\n", DisplayedText);
+    printf(DisplayedText);
 
     for (int ind = 1; ind <= 10; ind++)
     {
@@ -46,14 +46,14 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
 
         if (ind==10) // if there are Too Many Input Errors
         {
-            printf("\n%s\n", TextTooManyInputErrors);
+            printf(TextTooManyInputErrors);
             getchar();
             exit(0);
         }
 
         // try once more
-        printf("\n%s\n", TextInputError);
-        printf("%s\n", DisplayedText);
+        printf(TextInputError);
+        printf(DisplayedText);
     }
 
 
@@ -61,25 +61,55 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
 }
 
 
-int main()
+int Navigate ()
 {
-    printf("%s\n", TextWelcome);
+    while (1)
+    {
+        switch(Page)
+        {
+        case PageChangeLanguage:
+            ShowPageChangeLanguage();
+            break;
+        case PageOperationsWithTables:
+            ShowPageOperationsWithTables();
+            break;
+        case PageAddTable:
+            ShowPageAddTable();
+            break;
+
+
+        }
+
+
+
+
+    }
+    return 0;
+}
+
+
+int ShowPageChangeLanguage()
+{
     MenuIndex = ShowNavigationMenu(TextChangeLanguage, 3);
 
     switch(MenuIndex)
     {
     case 1:
+        Page = PageOperationsWithTables;
         break;
     case 2:
         CommandLineParametersUKR();
         TranslateToUKR();
-        printf("%s\n", TextWelcome);
+        printf(TextWelcome);
+        Page = PageOperationsWithTables;
         break;
     case 3:
         exit(0);
     }
+}
 
-
+int ShowPageOperationsWithTables()
+{
     MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 3);
 
     switch(MenuIndex)
@@ -87,21 +117,57 @@ int main()
     case 1:
         break;
     case 2:
+        Page = PageAddTable;
         break;
     case 3:
         exit(0);
     }
+}
+
+int ShowPageAddTable()
+{
+    printf(TextTableName);
+    char InputedTableName[MaxTableNameLenght];
+    fgets(InputedTableName, MaxTableNameLenght, stdin);
+    fflush(stdin); // clear input stream
+
+    printf(TextColumnNames);
+    char InputedColumnNames[MaxTableNameLenght];
+    fgets(InputedColumnNames, MaxTableNameLenght, stdin);
+    fflush(stdin); // clear input stream
 
 
+    // remove Enter
+    InputedTableName[strlen(InputedTableName) - 1] = '\0';
+    InputedColumnNames[strlen(InputedColumnNames) - 1] = '\0';
+
+    CreateTable(InputedTableName, InputedColumnNames);
+
+    Page = PageOperationsWithTables;
+}
+
+
+
+int main()
+{
+    printf("%s\n", TextWelcome);
+    Navigate();
+
+
+
+            //test
    printf("CanCreateTable %d\n", CanCreateTable());
+   printf("NumberOfTables %d\n", NumberOfTables());
 
-
-
-    strcpy(Tables[0].name, "test");
+    for (int i = 0; i<5; i++)
+    strcpy(Tables[i].name, "test");
 
     printf("%s\n", Tables[0].name);
 
+    CreateTable("Table # 2", "tt");
 
+   printf("CanCreateTable %d\n", CanCreateTable());
+   printf("NumberOfTables %d\n", NumberOfTables());
 
 
 
