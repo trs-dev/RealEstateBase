@@ -32,8 +32,6 @@ int NumberOfTables ()
 }
 
 
-
-
 //Tables Commands
 
 int CreateTable (char* TableName, char* ColumnNames)

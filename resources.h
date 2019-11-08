@@ -12,7 +12,11 @@ char* TextOperationsWithTables;
 char* TextTableName;
 char* TextColumnNames;
 
+char* TextSelectTable;
+
 char* TextCreateTableSuccess;
+
+char* TextReturn;
 
 
 char* TextInputError;

@@ -12,13 +12,13 @@
 
 
 int MenuIndex; //index of selected menu item
-enum NavigationPages {PageChangeLanguage, PageOperationsWithTables, PageAddTable};
+enum NavigationPages {PageChangeLanguage, PageOperationsWithTables, PageSelectTable, PageAddTable};
 int Page = PageChangeLanguage;
 
 
 int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
 {
-    int Variant = 0;
+    int Variant = -1;
     printf(DisplayedText);
 
     for (int ind = 1; ind <= 10; ind++)
@@ -41,7 +41,7 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
         printf("Variant <= NumberOfVariants: %d\n", Variant <= NumberOfVariants);
         */
 
-        if (Variant > 0 && Variant <= NumberOfVariants) //if all is ok
+        if (Variant >= 0 && Variant <= NumberOfVariants) //if all is ok
             return Variant;
 
         if (ind==10) // if there are Too Many Input Errors
@@ -73,9 +73,13 @@ int Navigate ()
         case PageOperationsWithTables:
             ShowPageOperationsWithTables();
             break;
+        case PageSelectTable:
+            ShowPageSelectTable();
+            break;
         case PageAddTable:
             ShowPageAddTable();
             break;
+
 
 
         }
@@ -90,7 +94,7 @@ int Navigate ()
 
 int ShowPageChangeLanguage()
 {
-    MenuIndex = ShowNavigationMenu(TextChangeLanguage, 3);
+    MenuIndex = ShowNavigationMenu(TextChangeLanguage, 2);
 
     switch(MenuIndex)
     {
@@ -103,23 +107,24 @@ int ShowPageChangeLanguage()
         printf(TextWelcome);
         Page = PageOperationsWithTables;
         break;
-    case 3:
+    case 0:
         exit(0);
     }
 }
 
 int ShowPageOperationsWithTables()
 {
-    MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 3);
+    MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 2);
 
     switch(MenuIndex)
     {
     case 1:
+        Page = PageSelectTable;
         break;
     case 2:
         Page = PageAddTable;
         break;
-    case 3:
+    case 0:
         exit(0);
     }
 }
@@ -146,6 +151,29 @@ int ShowPageAddTable()
     Page = PageOperationsWithTables;
 }
 
+int ShowPageSelectTable()
+{
+    int TablePosition = 1;
+
+    printf("-----------------------------------------------------------------------\n");
+    for (int i = 0; i < MaxNumberOfTables; i++)
+    {
+        if (Tables[i].name[0]!='\0')
+        {
+            printf("%d -> %s\n", TablePosition, Tables[i].name);
+            TablePosition++;
+        }
+    }
+
+    printf("-----------------------------------------------------------------------\n");
+    printf("0 -> %s\n", TextReturn);
+
+
+    MenuIndex = ShowNavigationMenu(TextSelectTable, TablePosition-1);
+
+
+    Page = PageOperationsWithTables;
+}
 
 
 int main()

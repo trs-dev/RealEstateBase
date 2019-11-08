@@ -9,9 +9,9 @@
 	"tablesdefinition.h"
 	"commands.h"
 
-1573162935 c:\dropbox\c_projects\realestatebase\resources.h
+1573211595 c:\dropbox\c_projects\realestatebase\resources.h
 
-1573162935 source:c:\dropbox\c_projects\realestatebase\resources.c
+1573211512 source:c:\dropbox\c_projects\realestatebase\resources.c
 	<stdio.h>
 	<stdlib.h>
 
@@ -23,7 +23,7 @@
 
 1572908682 c:\dropbox\c_projects\realestatebase\resourcesuk.h
 
-1573162898 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
+1573211536 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
@@ -41,7 +41,7 @@
 
 1573154036 c:\dropbox\c_projects\realestatebase\resourcesukr.h
 
-1573158685 source:c:\dropbox\c_projects\realestatebase\commands.c
+1573210609 source:c:\dropbox\c_projects\realestatebase\commands.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

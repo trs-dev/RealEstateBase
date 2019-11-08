@@ -9,17 +9,19 @@ void CommandLineParameters() //Command Line Parameters for current language
 }
 
 char* TextWelcome = "Hello! Welcome to Real Estate Base.\n";
-char* TextChangeLanguage = "Choose your language: \n 1 - English\n 2 - Ukrainian\n 3 - Exit:\n";
-char* TextOperationsWithTables = "Operations with tables: \n 1 - Show tables list and choose table\n 2 - Add new table \n 3 - Exit:\n";
+char* TextChangeLanguage = "Choose your language: \n 1 - English\n 2 - Ukrainian\n 0 - Exit:\n";
+char* TextOperationsWithTables = "Operations with tables: \n 1 - Show tables list and choose table\n 2 - Add new table \n 0 - Exit:\n";
 
 
 
 char* TextTableName = "Table name: ";
 char* TextColumnNames = "Column names: ";
 
+char* TextSelectTable = "Enter the table number to select it: ";
 
 char* TextCreateTableSuccess = "Table [%s] successfully created.\n";
 
+char* TextReturn = "Return";
 
 char* TextInputError = "Command not recognized. Please try again.\n";
 char* TextTooManyInputErrors = "There are too many unrecognized commands entered. Press any key for Exit.\n";
