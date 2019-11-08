@@ -12,14 +12,20 @@
 
 
 int MenuIndex; //index of selected menu item
-enum NavigationPages {PageChangeLanguage, PageOperationsWithTables, PageSelectTable, PageAddTable};
+int SelectedTableIndex; //index of selected table
+
+// navigation
+enum NavigationPages {PageChangeLanguage, PageOperationsWithTables, PageSelectTable, PageAddTable, PageOperationsWithSingleTable};
 int Page = PageChangeLanguage;
 
+char* DatabaseName = "DatabaseENG.dat";
 
-int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
+
+
+int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants, char* AdditionalData)
 {
     int Variant = -1;
-    printf(DisplayedText);
+    printf(DisplayedText, AdditionalData);
 
     for (int ind = 1; ind <= 10; ind++)
     {
@@ -53,7 +59,7 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants)
 
         // try once more
         printf(TextInputError);
-        printf(DisplayedText);
+        printf(DisplayedText, AdditionalData);
     }
 
 
@@ -79,7 +85,9 @@ int Navigate ()
         case PageAddTable:
             ShowPageAddTable();
             break;
-
+        case PageOperationsWithSingleTable:
+            ShowPageOperationsWithSingleTable();
+            break;
 
 
         }
@@ -94,27 +102,31 @@ int Navigate ()
 
 int ShowPageChangeLanguage()
 {
-    MenuIndex = ShowNavigationMenu(TextChangeLanguage, 2);
+    MenuIndex = ShowNavigationMenu(TextChangeLanguage, 2, "");
 
     switch(MenuIndex)
     {
     case 1:
         Page = PageOperationsWithTables;
+        OpenDB(DatabaseName);
         break;
     case 2:
         CommandLineParametersUKR();
         TranslateToUKR();
         printf(TextWelcome);
         Page = PageOperationsWithTables;
+        DatabaseName = "DatabaseUKR.dat";
+        OpenDB(DatabaseName);
         break;
     case 0:
         exit(0);
     }
+    return 0;
 }
 
 int ShowPageOperationsWithTables()
 {
-    MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 2);
+    MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 2, "");
 
     switch(MenuIndex)
     {
@@ -125,8 +137,10 @@ int ShowPageOperationsWithTables()
         Page = PageAddTable;
         break;
     case 0:
+        SaveDB(DatabaseName);
         exit(0);
     }
+    return 0;
 }
 
 int ShowPageAddTable()
@@ -149,6 +163,7 @@ int ShowPageAddTable()
     CreateTable(InputedTableName, InputedColumnNames);
 
     Page = PageOperationsWithTables;
+    return 0;
 }
 
 int ShowPageSelectTable()
@@ -156,28 +171,88 @@ int ShowPageSelectTable()
     int TablePosition = 1;
 
     printf("-----------------------------------------------------------------------\n");
-    for (int i = 0; i < MaxNumberOfTables; i++)
+    for (int i = 0; i <= MaxNumberOfTables; i++)
     {
-        if (Tables[i].name[0]!='\0')
+        if (Tables[i].Name[0]!='\0')
         {
-            printf("%d -> %s\n", TablePosition, Tables[i].name);
+            printf("%d -> %s\n", Tables[i].Index, Tables[i].Name);
             TablePosition++;
         }
     }
+
+    if (TablePosition == 1)
+        printf(TextNoTablesInDB);
+
+
 
     printf("-----------------------------------------------------------------------\n");
     printf("0 -> %s\n", TextReturn);
 
 
-    MenuIndex = ShowNavigationMenu(TextSelectTable, TablePosition-1);
+    MenuIndex = ShowNavigationMenu(TextSelectTable, TablePosition-1, "");
 
-
-    Page = PageOperationsWithTables;
+    if (MenuIndex>0)
+    {
+       SelectedTableIndex = MenuIndex;
+       Page = PageOperationsWithSingleTable;
+    }
+    else
+        Page = PageOperationsWithTables;
+    return 0;
 }
+
+int ShowPageOperationsWithSingleTable()
+{
+    MenuIndex = ShowNavigationMenu(TextOperationsWithSingleTable, 3, Tables[SelectedTableIndex-1].Name);
+
+    switch(MenuIndex)
+    {
+    case 1:
+
+        break;
+    case 2:
+
+        break;
+    case 3:
+        DeleteTable(SelectedTableIndex-1);
+        Page = PageOperationsWithTables;
+        break;
+    case 0:
+        Page = PageOperationsWithTables;
+        break;
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 int main()
 {
+
     printf("%s\n", TextWelcome);
     Navigate();
 
@@ -188,16 +263,16 @@ int main()
    printf("NumberOfTables %d\n", NumberOfTables());
 
     for (int i = 0; i<5; i++)
-    strcpy(Tables[i].name, "test");
+    strcpy(Tables[i].Name, "test");
 
-    printf("%s\n", Tables[0].name);
+    printf("%s\n", Tables[0].Name);
 
     CreateTable("Table # 2", "tt");
 
    printf("CanCreateTable %d\n", CanCreateTable());
    printf("NumberOfTables %d\n", NumberOfTables());
 
-
+    SaveDB("newDB.dat");
 
 
 

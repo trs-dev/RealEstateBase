@@ -15,13 +15,18 @@ void TranslateToUKR() //
 TextWelcome = "Доброго дня! Вітаємо в базі нерухомого майна.\n";
 TextChangeLanguage = "Choose your language: \n 1 - English\n 2 - Ukrainian\n 0 - Exit:\n";
 TextOperationsWithTables = "Операції з таблицями: \n 1 - Показати список таблиць і вибрати таблицю \n 2 - Створити таблицю \n 0 - Вихід:\n";
+TextOperationsWithSingleTable = "Операції з таблицею [%s]: \n 1 - Відобразити вміст таблиці\n 2 - Редагування, видалення чи перемащення колонок \n 3 - Видалити таблицю \n 0 - Назад:\n";
 
 TextTableName = "Назва таблиці: ";
 TextColumnNames = "Стовпці таблиці: ";
 
 TextSelectTable = "Введіть номер таблиці для її вибору: ";
+TextNoTablesInDB = "В базі даних таблиці відсутні.\n";
 
 TextCreateTableSuccess = "Таблицю [%s] успішно створено.\n";
+TextDeleteTableSuccess = "Таблицю [%s] успішно видалено.\n";
+
+TextOpenFileError = "Помилка відкриття файлу";
 
 TextReturn = "Назад";
 

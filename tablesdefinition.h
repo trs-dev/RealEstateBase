@@ -23,14 +23,15 @@ union Record
 
 struct TableColumn
 {
-    char name[MaxColumnNameLenght];
+    char Name[MaxColumnNameLenght];
     enum ColumnType type;
     int Index;
 } TableColumn;
 
 struct Table
 {
-    char name[MaxTableNameLenght];
+    char Name[MaxTableNameLenght];
+    int Index;
     struct TableColumn Columns[MaxNumberOfColumns];
     union Record Cells[MaxNumberOfColumns][MaxNumberOfRows];
 } Table;

@@ -6,6 +6,9 @@ void CommandLineParameters();
 char* TextWelcome;
 char* TextChangeLanguage;
 char* TextOperationsWithTables;
+char* TextOperationsWithSingleTable;
+
+
 
 
 
@@ -13,8 +16,13 @@ char* TextTableName;
 char* TextColumnNames;
 
 char* TextSelectTable;
+char* TextNoTablesInDB;
 
 char* TextCreateTableSuccess;
+char* TextDeleteTableSuccess;
+
+char* TextOpenFileError;
+
 
 char* TextReturn;
 

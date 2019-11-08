@@ -6,6 +6,8 @@ int StartWith();
 int ParseCommand();
 
 
+int SaveDB();
+
 int CreateTable();
 
 

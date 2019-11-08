@@ -2,3 +2,6 @@
 bin/
 obj/
 
+newDB.dat
+DatabaseENG.dat
+DatabaseUKR.dat
