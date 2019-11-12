@@ -168,28 +168,26 @@ int ShowPageAddTable()
 
 int ShowPageSelectTable()
 {
-    int TablePosition = 1;
-
+    int NumberOfTablesLocal = NumberOfTables();
     printf("-----------------------------------------------------------------------\n");
-    for (int i = 0; i <= MaxNumberOfTables; i++)
-    {
-        if (Tables[i].Name[0]!='\0')
+        if (NumberOfTablesLocal == 0)
         {
-            printf("%d -> %s\n", Tables[i].Index, Tables[i].Name);
-            TablePosition++;
+            printf(TextNoTablesInDB);
         }
-    }
-
-    if (TablePosition == 1)
-        printf(TextNoTablesInDB);
-
-
+        else
+        {
+            for (int i = 1; i <= NumberOfTablesLocal; i++)
+            {
+                int TablePosition = FindTablePositionByIndex(i);
+                printf("%d -> %s\n", Tables[TablePosition].Index, Tables[TablePosition].Name);
+            }
+        }
 
     printf("-----------------------------------------------------------------------\n");
     printf("0 -> %s\n", TextReturn);
 
 
-    MenuIndex = ShowNavigationMenu(TextSelectTable, TablePosition-1, "");
+    MenuIndex = ShowNavigationMenu(TextSelectTable, NumberOfTablesLocal, "");
 
     if (MenuIndex>0)
     {
@@ -203,7 +201,7 @@ int ShowPageSelectTable()
 
 int ShowPageOperationsWithSingleTable()
 {
-    MenuIndex = ShowNavigationMenu(TextOperationsWithSingleTable, 3, Tables[SelectedTableIndex-1].Name);
+    MenuIndex = ShowNavigationMenu(TextOperationsWithSingleTable, 3, Tables[FindTablePositionByIndex(SelectedTableIndex)].Name);
 
     switch(MenuIndex)
     {
@@ -214,7 +212,7 @@ int ShowPageOperationsWithSingleTable()
 
         break;
     case 3:
-        DeleteTable(SelectedTableIndex-1);
+        DeleteTable(FindTablePositionByIndex(SelectedTableIndex));
         Page = PageOperationsWithTables;
         break;
     case 0:

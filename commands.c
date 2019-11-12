@@ -26,10 +26,33 @@ int NumberOfTables ()
 {
     int num = 0;
     for (int i = 0; i<MaxNumberOfTables; i++)
-        if (Tables[i].Name[0]!='\0')
+        if (Tables[i].Index>0)
             num++;
     return num;
 }
+
+int NumberOfColumns (int TablePosition)
+{
+    int num = 0;
+    for (int i = 0; i<MaxNumberOfColumns; i++)
+        if (Tables[TablePosition].Columns[i].Index>0)
+            num++;
+    return num;
+}
+
+int FindTablePositionByIndex (int TableIndex)
+{
+    for (int i = 0; i<MaxNumberOfTables; i++)
+    {
+        if (Tables[i].Index==TableIndex)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
 
 //Database Commands
 int SaveDB (char* FileName)
@@ -89,7 +112,7 @@ int CreateTable (char* TableName, char* ColumnNames)
          printf(TextTooManyTables);
          return 0;
     }
-
+    // find position for new table
     int NewTablePosition = -1;
     for (int i = 0; i<MaxNumberOfTables; i++)
     {
@@ -102,6 +125,28 @@ int CreateTable (char* TableName, char* ColumnNames)
     Tables[NewTablePosition].Index = NumberOfTables()+1;
     strcpy(Tables[NewTablePosition].Name, TableName);
 
+    //parser for column names
+    int ColumnIndex = 0;
+    char *PartOfStr;
+    PartOfStr = strtok(ColumnNames,"/"); // get first column name
+
+    while (PartOfStr != NULL)
+   {
+       if (PartOfStr[0]=='$') // Integer Column
+       {
+           PartOfStr +=1; // delete first symbol
+           Tables[NewTablePosition].Columns[ColumnIndex].Type = ValNUM;// Integer Column
+       }
+       else
+       {
+           Tables[NewTablePosition].Columns[ColumnIndex].Type = ValTEXT;// Text Column
+       }
+
+      strcpy(Tables[NewTablePosition].Columns[ColumnIndex].Name, PartOfStr); // Set Column name
+
+      Tables[NewTablePosition].Columns[ColumnIndex].Index = NumberOfTables(NewTablePosition)+1;
+      PartOfStr = strtok (NULL,"/"); // get next column name
+   }
     printf(TextCreateTableSuccess, TableName);
     return 0;
 }
@@ -110,13 +155,24 @@ int CanCreateTable ()
     return NumberOfTables() < MaxNumberOfTables;
 }
 
-int DeleteTable (int TableIndex)
+int DeleteTable (int TablePosition)
 {
     char OldTableName[MaxTableNameLenght];
-    strcpy(OldTableName, Tables[TableIndex].Name);
+    strcpy(OldTableName, Tables[TablePosition].Name);
 
-    Tables[TableIndex].Index = 0;
-    strcpy(Tables[TableIndex].Name, "\0");
+    int OldTableIndex = Tables[TablePosition].Index;
+
+    Tables[TablePosition].Index = 0;
+    strcpy(Tables[TablePosition].Name, "\0");
+
+    //shift indexes of tables
+    for (int i = 0; i<MaxNumberOfTables; i++)
+    {
+       if (Tables[i].Index > OldTableIndex)
+       {
+           Tables[i].Index--;
+       }
+    }
 
     printf(TextDeleteTableSuccess, OldTableName);
     return 0;

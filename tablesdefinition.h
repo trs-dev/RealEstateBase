@@ -24,7 +24,7 @@ union Record
 struct TableColumn
 {
     char Name[MaxColumnNameLenght];
-    enum ColumnType type;
+    enum ColumnType Type;
     int Index;
 } TableColumn;
 
