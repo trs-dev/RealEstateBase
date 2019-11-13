@@ -59,7 +59,7 @@ int SaveDB (char* FileName)
 {
     FILE * fp;
     char *c;
-    int FileSize = MaxNumberOfTables * sizeof(struct Table);
+    int fileSize = MaxNumberOfTables * sizeof(struct Table);
     //Open file
     if ((fp = fopen(FileName, "wb")) == NULL)
     {
@@ -68,7 +68,7 @@ int SaveDB (char* FileName)
     }
     //Write to file
     c = (char *)Tables;
-    for (int i = 0; i < FileSize; i++)
+    for (int i = 0; i < fileSize; i++)
     {
         putc(*c, fp);
         c++;
@@ -113,39 +113,39 @@ int CreateTable (char* TableName, char* ColumnNames)
          return 0;
     }
     // find position for new table
-    int NewTablePosition = -1;
+    int newTablePosition = -1;
     for (int i = 0; i<MaxNumberOfTables; i++)
     {
        if (Tables[i].Name[0]=='\0')
        {
-           NewTablePosition = i;
+           newTablePosition = i;
            break;
        }
     }
-    Tables[NewTablePosition].Index = NumberOfTables()+1;
-    strcpy(Tables[NewTablePosition].Name, TableName);
+    Tables[newTablePosition].Index = NumberOfTables()+1;
+    strcpy(Tables[newTablePosition].Name, TableName);
 
     //parser for column names
-    int ColumnIndex = 0;
-    char *PartOfStr;
-    PartOfStr = strtok(ColumnNames,"/"); // get first column name
+    int columnIndex = 0;
+    char *partOfStr;
+    partOfStr = strtok(ColumnNames,"/"); // get first column name
 
-    while (PartOfStr != NULL)
+    while (partOfStr != NULL)
    {
-       if (PartOfStr[0]=='$') // Integer Column
+       if (partOfStr[0]=='$') // Integer Column
        {
-           PartOfStr +=1; // delete first symbol
-           Tables[NewTablePosition].Columns[ColumnIndex].Type = ValNUM;// Integer Column
+           partOfStr +=1; // delete first symbol
+           Tables[newTablePosition].Columns[columnIndex].Type = ValNUM;// Integer Column
        }
        else
        {
-           Tables[NewTablePosition].Columns[ColumnIndex].Type = ValTEXT;// Text Column
+           Tables[newTablePosition].Columns[columnIndex].Type = ValTEXT;// Text Column
        }
 
-      strcpy(Tables[NewTablePosition].Columns[ColumnIndex].Name, PartOfStr); // Set Column name
+      strcpy(Tables[newTablePosition].Columns[columnIndex].Name, partOfStr); // Set Column name
 
-      Tables[NewTablePosition].Columns[ColumnIndex].Index = NumberOfTables(NewTablePosition)+1;
-      PartOfStr = strtok (NULL,"/"); // get next column name
+      Tables[newTablePosition].Columns[columnIndex].Index = NumberOfTables(newTablePosition)+1;
+      partOfStr = strtok (NULL,"/"); // get next column name
    }
     printf(TextCreateTableSuccess, TableName);
     return 0;
@@ -157,10 +157,10 @@ int CanCreateTable ()
 
 int DeleteTable (int TablePosition)
 {
-    char OldTableName[MaxTableNameLenght];
-    strcpy(OldTableName, Tables[TablePosition].Name);
+    char oldTableName[MaxTableNameLenght];
+    strcpy(oldTableName, Tables[TablePosition].Name);
 
-    int OldTableIndex = Tables[TablePosition].Index;
+    int oldTableIndex = Tables[TablePosition].Index;
 
     Tables[TablePosition].Index = 0;
     strcpy(Tables[TablePosition].Name, "\0");
@@ -168,13 +168,13 @@ int DeleteTable (int TablePosition)
     //shift indexes of tables
     for (int i = 0; i<MaxNumberOfTables; i++)
     {
-       if (Tables[i].Index > OldTableIndex)
+       if (Tables[i].Index > oldTableIndex)
        {
            Tables[i].Index--;
        }
     }
 
-    printf(TextDeleteTableSuccess, OldTableName);
+    printf(TextDeleteTableSuccess, oldTableName);
     return 0;
 }
 

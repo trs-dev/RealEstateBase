@@ -24,31 +24,31 @@ char* DatabaseName = "DatabaseENG.dat";
 
 int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants, char* AdditionalData)
 {
-    int Variant = -1;
+    int variant = -1;
     printf(DisplayedText, AdditionalData);
 
     for (int ind = 1; ind <= 10; ind++)
     {
-        Variant = 0;
-        char InputedText[200];
+        variant = 0;
+        char inputedtext[200];
         printf(" >>> ");
-        fgets(InputedText, 2, stdin);
+        fgets(inputedtext, 2, stdin);
         fflush(stdin); // clear input stream
-        if(isdigit(InputedText[0]))
+        if(isdigit(inputedtext[0]))
         {
-            Variant = atoi(InputedText);
+            variant = atoi(inputedtext);
         }
          // debug output
          /*
-        printf("You enter: %d\n", InputedText);
-        printf("Variant: %d\n", Variant);
-        printf("isdigit: %d\n", isdigit(InputedText[0]));
-        printf("Variant > 0: %d\n", Variant > 0);
-        printf("Variant <= NumberOfVariants: %d\n", Variant <= NumberOfVariants);
+        printf("You enter: %d\n", inputedtext);
+        printf("variant: %d\n", variant);
+        printf("isdigit: %d\n", isdigit(inputedtext[0]));
+        printf("variant > 0: %d\n", variant > 0);
+        printf("variant <= NumberOfVariants: %d\n", variant <= NumberOfVariants);
         */
 
-        if (Variant >= 0 && Variant <= NumberOfVariants) //if all is ok
-            return Variant;
+        if (variant >= 0 && variant <= NumberOfVariants) //if all is ok
+            return variant;
 
         if (ind==10) // if there are Too Many Input Errors
         {
@@ -146,21 +146,21 @@ int ShowPageOperationsWithTables()
 int ShowPageAddTable()
 {
     printf(TextTableName);
-    char InputedTableName[MaxTableNameLenght];
-    fgets(InputedTableName, MaxTableNameLenght, stdin);
+    char inputedTableName[MaxTableNameLenght];
+    fgets(inputedTableName, MaxTableNameLenght, stdin);
     fflush(stdin); // clear input stream
 
     printf(TextColumnNames);
-    char InputedColumnNames[MaxTableNameLenght];
-    fgets(InputedColumnNames, MaxTableNameLenght, stdin);
+    char inputedColumnNames[MaxTableNameLenght];
+    fgets(inputedColumnNames, MaxTableNameLenght, stdin);
     fflush(stdin); // clear input stream
 
 
     // remove Enter
-    InputedTableName[strlen(InputedTableName) - 1] = '\0';
-    InputedColumnNames[strlen(InputedColumnNames) - 1] = '\0';
+    inputedTableName[strlen(inputedTableName) - 1] = '\0';
+    inputedColumnNames[strlen(inputedColumnNames) - 1] = '\0';
 
-    CreateTable(InputedTableName, InputedColumnNames);
+    CreateTable(inputedTableName, inputedColumnNames);
 
     Page = PageOperationsWithTables;
     return 0;
@@ -168,15 +168,15 @@ int ShowPageAddTable()
 
 int ShowPageSelectTable()
 {
-    int NumberOfTablesLocal = NumberOfTables();
+    int numberOfTablesLocal = NumberOfTables();
     printf("-----------------------------------------------------------------------\n");
-        if (NumberOfTablesLocal == 0)
+        if (numberOfTablesLocal == 0)
         {
             printf(TextNoTablesInDB);
         }
         else
         {
-            for (int i = 1; i <= NumberOfTablesLocal; i++)
+            for (int i = 1; i <= numberOfTablesLocal; i++)
             {
                 int TablePosition = FindTablePositionByIndex(i);
                 printf("%d -> %s\n", Tables[TablePosition].Index, Tables[TablePosition].Name);
@@ -187,7 +187,7 @@ int ShowPageSelectTable()
     printf("0 -> %s\n", TextReturn);
 
 
-    MenuIndex = ShowNavigationMenu(TextSelectTable, NumberOfTablesLocal, "");
+    MenuIndex = ShowNavigationMenu(TextSelectTable, numberOfTablesLocal, "");
 
     if (MenuIndex>0)
     {
