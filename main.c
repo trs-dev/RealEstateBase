@@ -15,7 +15,9 @@ int MenuIndex; //index of selected menu item
 int SelectedTableIndex; //index of selected table
 
 // navigation
-enum NavigationPages {PageChangeLanguage, PageOperationsWithTables, PageSelectTable, PageAddTable, PageOperationsWithSingleTable};
+enum NavigationPages {PageChangeLanguage, PageOperationsWithTables, PageSelectTable, PageAddTable, PageOperationsWithSingleTable,
+PageRenameTable, PageMoveTable
+};
 int Page = PageChangeLanguage;
 
 char* DatabaseName = "DatabaseENG.dat";
@@ -29,20 +31,19 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants, char* Additio
 
     for (int ind = 1; ind <= 10; ind++)
     {
-        variant = 0;
-        char inputedtext[200];
+        char inputedText[200];
         printf(" >>> ");
-        fgets(inputedtext, 2, stdin);
+        fgets(inputedText, 2, stdin);
         fflush(stdin); // clear input stream
-        if(isdigit(inputedtext[0]))
+        if(isdigit(inputedText[0]))
         {
-            variant = atoi(inputedtext);
+            variant = atoi(inputedText);
         }
          // debug output
          /*
-        printf("You enter: %d\n", inputedtext);
+        printf("You enter: %d\n", inputedText);
         printf("variant: %d\n", variant);
-        printf("isdigit: %d\n", isdigit(inputedtext[0]));
+        printf("isdigit: %d\n", isdigit(inputedText[0]));
         printf("variant > 0: %d\n", variant > 0);
         printf("variant <= NumberOfVariants: %d\n", variant <= NumberOfVariants);
         */
@@ -67,7 +68,7 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants, char* Additio
 }
 
 
-int Navigate ()
+int Navigate () // Navigation function. Otherwise ShowPage functions will newer end.
 {
     while (1)
     {
@@ -88,16 +89,64 @@ int Navigate ()
         case PageOperationsWithSingleTable:
             ShowPageOperationsWithSingleTable();
             break;
+        case PageRenameTable:
+            ShowPageRenameTable();
+            break;
+        case PageMoveTable:
+            ShowPageMoveTable();
+            break;
+
+
+
+
+
+
+
+
 
 
         }
-
-
-
-
     }
     return 0;
 }
+
+
+
+
+int PrintListOfTables()
+{
+        int numberOfTablesLocal = NumberOfTables();
+    printf("-----------------------------------------------------------------------\n");
+        if (numberOfTablesLocal == 0)
+        {
+            printf(TextNoTablesInDB);
+        }
+        else
+        {
+            for (int i = 1; i <= numberOfTablesLocal; i++)
+            {
+                int TablePosition = FindTablePositionByIndex(i);
+                printf("%d -> %s\n", Tables[TablePosition].Index, Tables[TablePosition].Name);
+            }
+        }
+
+    printf("-----------------------------------------------------------------------\n");
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 int ShowPageChangeLanguage()
@@ -166,28 +215,13 @@ int ShowPageAddTable()
     return 0;
 }
 
+
 int ShowPageSelectTable()
 {
-    int numberOfTablesLocal = NumberOfTables();
-    printf("-----------------------------------------------------------------------\n");
-        if (numberOfTablesLocal == 0)
-        {
-            printf(TextNoTablesInDB);
-        }
-        else
-        {
-            for (int i = 1; i <= numberOfTablesLocal; i++)
-            {
-                int TablePosition = FindTablePositionByIndex(i);
-                printf("%d -> %s\n", Tables[TablePosition].Index, Tables[TablePosition].Name);
-            }
-        }
+    PrintListOfTables();
 
-    printf("-----------------------------------------------------------------------\n");
     printf("0 -> %s\n", TextReturn);
-
-
-    MenuIndex = ShowNavigationMenu(TextSelectTable, numberOfTablesLocal, "");
+    MenuIndex = ShowNavigationMenu(TextSelectTable, NumberOfTables(), "");
 
     if (MenuIndex>0)
     {
@@ -201,7 +235,7 @@ int ShowPageSelectTable()
 
 int ShowPageOperationsWithSingleTable()
 {
-    MenuIndex = ShowNavigationMenu(TextOperationsWithSingleTable, 3, Tables[FindTablePositionByIndex(SelectedTableIndex)].Name);
+    MenuIndex = ShowNavigationMenu(TextOperationsWithSingleTable, 5, Tables[FindTablePositionByIndex(SelectedTableIndex)].Name);
 
     switch(MenuIndex)
     {
@@ -212,6 +246,12 @@ int ShowPageOperationsWithSingleTable()
 
         break;
     case 3:
+        Page = PageRenameTable;
+        break;
+    case 4:
+        Page = PageMoveTable;
+        break;
+    case 5:
         DeleteTable(FindTablePositionByIndex(SelectedTableIndex));
         Page = PageOperationsWithTables;
         break;
@@ -222,7 +262,37 @@ int ShowPageOperationsWithSingleTable()
     return 0;
 }
 
+int ShowPageRenameTable()
+{
+    printf(TextRenamingTable, Tables[FindTablePositionByIndex(SelectedTableIndex)].Name);
+    printf(TextNewName);
 
+    char inputedTableName[MaxTableNameLenght];
+    fgets(inputedTableName, MaxTableNameLenght, stdin);
+    fflush(stdin); // clear input stream
+
+    // remove Enter
+    inputedTableName[strlen(inputedTableName) - 1] = '\0';
+
+    RenameTable(FindTablePositionByIndex(SelectedTableIndex),inputedTableName);
+
+    Page = PageOperationsWithSingleTable;
+    return 0;
+}
+
+
+int ShowPageMoveTable()
+{
+    int newTableIndex = ShowNavigationMenu(TextMovingTable, NumberOfTables(), Tables[FindTablePositionByIndex(SelectedTableIndex)].Name);
+
+    if (newTableIndex > 0)
+    {
+        MoveTable(SelectedTableIndex, newTableIndex);
+    }
+
+    Page = PageOperationsWithSingleTable;
+    return 0;
+}
 
 
 
@@ -257,6 +327,7 @@ int main()
 
 
             //test
+            /*
    printf("CanCreateTable %d\n", CanCreateTable());
    printf("NumberOfTables %d\n", NumberOfTables());
 
@@ -275,7 +346,7 @@ int main()
 
 
 
-    printf("All are done!\n");
+    printf("All are done!\n");*/
 
     return 0;
 }

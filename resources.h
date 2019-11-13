@@ -15,11 +15,17 @@ char* TextOperationsWithSingleTable;
 char* TextTableName;
 char* TextColumnNames;
 
+char* TextRenamingTable;
+char* TextNewName;
+
+char* TextMovingTable;
+
 char* TextSelectTable;
 char* TextNoTablesInDB;
 
 char* TextCreateTableSuccess;
 char* TextDeleteTableSuccess;
+char* TextRenameTableSuccess;
 
 char* TextOpenFileError;
 

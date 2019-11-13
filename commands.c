@@ -5,6 +5,8 @@
 #include "resources.h"
 #include "tablesdefinition.h"
 
+#define max(x, y) ( (x) > (y) ? (x) : (y) )
+#define min(x, y) ( (x) < (y) ? (x) : (y) )
 
 /*
 int StartWith(const char *str, const char *prefix)
@@ -178,8 +180,39 @@ int DeleteTable (int TablePosition)
     return 0;
 }
 
+int RenameTable (int TablePosition, char* NewTableName)
+{
+    char oldTableName[MaxTableNameLenght];
+    strcpy(oldTableName, Tables[TablePosition].Name);
+    strcpy(Tables[TablePosition].Name, NewTableName);
+    printf(TextRenameTableSuccess, oldTableName, NewTableName);
+    return 0;
+}
 
+int MoveTable (int OldTableIndex, int NewTableIndex)
+{
+    int shiftDirection = 1;
+    if (OldTableIndex < NewTableIndex)
+    {
+        shiftDirection = -1;
+    }
 
+    //shift indexes of tables
+    for (int i = 0; i<MaxNumberOfTables; i++)
+    {
+        if (Tables[i].Index == OldTableIndex)
+        {
+            Tables[i].Index = NewTableIndex;
+        }
+        else if (((Tables[i].Index > min(OldTableIndex, NewTableIndex)) && (Tables[i].Index < max(OldTableIndex, NewTableIndex)))
+                 || (Tables[i].Index==NewTableIndex))
+        {
+            Tables[i].Index += shiftDirection;
+        }
+    }
+
+    return 0;
+}
 
 
 
