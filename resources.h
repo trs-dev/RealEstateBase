@@ -27,6 +27,10 @@ char* TextCreateTableSuccess;
 char* TextDeleteTableSuccess;
 char* TextRenameTableSuccess;
 
+char* TextNoColumnsInTable;
+
+
+
 char* TextOpenFileError;
 
 

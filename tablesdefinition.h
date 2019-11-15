@@ -38,5 +38,9 @@ struct Table
 
 struct Table Tables[]; //main database
 
+int NumberOfTables ();
+int NumberOfColumns (int TablePosition);
+int FindTablePositionByIndex (int TableIndex);
+int FindColumnPositionByIndex (int TableIndex, int ColumnIndex);
 
 #endif // TABLEDEFINITION_H_INCLUDED

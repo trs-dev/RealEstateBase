@@ -125,8 +125,8 @@ int PrintListOfTables()
         {
             for (int i = 1; i <= numberOfTablesLocal; i++)
             {
-                int TablePosition = FindTablePositionByIndex(i);
-                printf("%d -> %s\n", Tables[TablePosition].Index, Tables[TablePosition].Name);
+                int tablePosition = FindTablePositionByIndex(i);
+                printf("%d -> %s\n", Tables[tablePosition].Index, Tables[tablePosition].Name);
             }
         }
 
@@ -135,7 +135,30 @@ int PrintListOfTables()
     return 0;
 }
 
+int PrintListOfColumns()
+{
+        int tablePosition = FindTablePositionByIndex(SelectedTableIndex);
+        int numberOfColumnsLocal = NumberOfColumns(tablePosition);
 
+
+    printf("-----------------------------------------------------------------------\n");
+        if (numberOfColumnsLocal == 0)
+        {
+            printf(TextNoColumnsInTable);
+        }
+        else
+        {
+            for (int i = 1; i <= numberOfColumnsLocal; i++)
+            {
+                int columnPosition = FindColumnPositionByIndex(tablePosition, i);
+                printf("%d -> %s\n", Tables[tablePosition].Columns[columnPosition].Index, Tables[tablePosition].Columns[columnPosition].Name);
+            }
+        }
+
+    printf("-----------------------------------------------------------------------\n");
+
+    return 0;
+}
 
 
 
@@ -240,9 +263,11 @@ int ShowPageOperationsWithSingleTable()
     switch(MenuIndex)
     {
     case 1:
-
+        //Display all data
+        PrintListOfColumns();
         break;
     case 2:
+        //Edit, remove or move columns
 
         break;
     case 3:

@@ -24,37 +24,6 @@ int ParseCommand (char* InputedText)
 }
 */
 
-int NumberOfTables ()
-{
-    int num = 0;
-    for (int i = 0; i<MaxNumberOfTables; i++)
-        if (Tables[i].Index>0)
-            num++;
-    return num;
-}
-
-int NumberOfColumns (int TablePosition)
-{
-    int num = 0;
-    for (int i = 0; i<MaxNumberOfColumns; i++)
-        if (Tables[TablePosition].Columns[i].Index>0)
-            num++;
-    return num;
-}
-
-int FindTablePositionByIndex (int TableIndex)
-{
-    for (int i = 0; i<MaxNumberOfTables; i++)
-    {
-        if (Tables[i].Index==TableIndex)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-
-
 
 //Database Commands
 int SaveDB (char* FileName)
@@ -146,8 +115,9 @@ int CreateTable (char* TableName, char* ColumnNames)
 
       strcpy(Tables[newTablePosition].Columns[columnIndex].Name, partOfStr); // Set Column name
 
-      Tables[newTablePosition].Columns[columnIndex].Index = NumberOfTables(newTablePosition)+1;
+      Tables[newTablePosition].Columns[columnIndex].Index = columnIndex+1;
       partOfStr = strtok (NULL,"/"); // get next column name
+      columnIndex++;
    }
     printf(TextCreateTableSuccess, TableName);
     return 0;
@@ -215,12 +185,5 @@ int MoveTable (int OldTableIndex, int NewTableIndex)
 }
 
 
-
-
-/*
-int InsertInto (struct Table *Tables, char* TableName, struct Record *Records)
-{
-    return 0;
-}*/
 
 

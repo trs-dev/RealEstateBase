@@ -31,6 +31,22 @@ char* TextCreateTableSuccess = "Table [%s] successfully created.\n";
 char* TextDeleteTableSuccess = "Table [%s] has been deleted.\n";
 char* TextRenameTableSuccess = "Table [%s] has been renamed to [%s].\n";
 
+
+char* TextNoColumnsInTable = "There are no Columns in Table.\n";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 char* TextOpenFileError = "Error occured while opening file";
 
 
