@@ -10,9 +10,9 @@
 	"commands.h"
 	"navigate.h"
 
-1574342123 c:\dropbox\c_projects\realestatebase\resources.h
+1574367422 c:\dropbox\c_projects\realestatebase\resources.h
 
-1574342105 source:c:\dropbox\c_projects\realestatebase\resources.c
+1574367422 source:c:\dropbox\c_projects\realestatebase\resources.c
 	<stdio.h>
 	<stdlib.h>
 
@@ -24,7 +24,7 @@
 
 1572908682 c:\dropbox\c_projects\realestatebase\resourcesuk.h
 
-1573679182 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
+1574343970 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
@@ -42,7 +42,7 @@
 
 1573154036 c:\dropbox\c_projects\realestatebase\resourcesukr.h
 
-1574342666 source:c:\dropbox\c_projects\realestatebase\commands.c
+1574366959 source:c:\dropbox\c_projects\realestatebase\commands.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -81,13 +81,13 @@
 
 1573978179 c:\dropbox\c_projects\realestatebase\menu.h
 
-1574238748 source:c:\dropbox\c_projects\realestatebase\display.c
+1574369340 source:c:\dropbox\c_projects\realestatebase\display.c
 	<windows.h>
 	"resources.h"
 	"commands.h"
 	"tablesdefinition.h"
 
-1574335319 source:c:\dropbox\c_projects\realestatebase\navigate.c
+1574368506 source:c:\dropbox\c_projects\realestatebase\navigate.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -98,5 +98,5 @@
 	"commands.h"
 	"navigate.h"
 
-1574343638 c:\dropbox\c_projects\realestatebase\navigate.h
+1574367769 c:\dropbox\c_projects\realestatebase\navigate.h
 

@@ -9,7 +9,7 @@ int SelectedTableIndex; //index of selected table
 
 // navigation
 enum NavigationPages {PageChangeLanguage, PageOperationsWithTables, PageSelectTable, PageAddTable, PageOperationsWithSingleTable,
-PageRenameTable, PageMoveTable, PageAddColumn
+PageRenameTable, PageMoveTable, PageAddColumn, PageAddRow
 };
 int Page;
 

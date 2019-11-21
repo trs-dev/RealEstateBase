@@ -280,7 +280,7 @@ int CanAddRow (int TablePosition)
 {
     return NumberOfRows(TablePosition) < MaxNumberOfRows;
 }
-int AddRow (int TablePosition)
+int AddRow (int TablePosition, char* Records)
 {
     if(!CanAddRow(TablePosition))
     {
@@ -298,6 +298,28 @@ int AddRow (int TablePosition)
        }
     }
     Tables[TablePosition].Rows[newRowPosition].Index = NumberOfRows(TablePosition)+1;
+
+    //parser for records
+    int columnIndex = 1;
+    char *partOfStr;
+    partOfStr = strtok(Records,"/"); // get first record
+
+    while (partOfStr != NULL)
+   {
+       int columnPosition = FindColumnPositionByIndex(TablePosition, columnIndex);
+       if (Tables[TablePosition].Columns[columnPosition].Type == ValNUM) // Integer Column
+       {
+           Tables[TablePosition].Rows[newRowPosition].Records[columnPosition].ValNUM = atoi(partOfStr);
+       }
+       else
+       {
+           strcpy(Tables[TablePosition].Rows[newRowPosition].Records[columnPosition].ValTEXT, partOfStr);
+       }
+      partOfStr = strtok (NULL,"/"); // get next column name
+      columnIndex++;
+   }
+
+
     printf(TextCreateRowSuccess);
     return 0;
 }

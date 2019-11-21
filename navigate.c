@@ -90,8 +90,12 @@ int Navigate () // Navigation function. Otherwise ShowPage functions will newer 
         case PageMoveTable:
             ShowPageMoveTable();
             break;
-
-
+        case PageAddColumn:
+            ShowPageAddColumn();
+            break;
+        case PageAddRow:
+            ShowPageAddRow();
+            break;
 
 
 
@@ -151,8 +155,6 @@ int PrintListOfColumns()
         }
 
     printf("-----------------------------------------------------------------------\n");
-
-    DisplayTable(tablePosition);
 
     return 0;
 }
@@ -260,27 +262,29 @@ int ShowPageOperationsWithSingleTable()
     switch(MenuIndex)
     {
     case 1:
-        //Display all data
-        PrintListOfColumns();
+        DisplayTable(FindTablePositionByIndex(SelectedTableIndex));
         break;
     case 2:
-        //Edit, remove or move columns
-
+        //add row
+        Page = PageAddRow;
         break;
     case 3:
-        Page = PageRenameTable;
+        //Edit, remove or move columns
+        PrintListOfColumns();
         break;
     case 4:
-        Page = PageMoveTable;
+        Page = PageRenameTable;
         break;
     case 5:
-        //add column
+        Page = PageMoveTable;
         break;
-     case 6:
+    case 6:
+        Page = PageAddColumn;
+        break;
+     case 7:
         DeleteTable(FindTablePositionByIndex(SelectedTableIndex));
         Page = PageOperationsWithTables;
         break;
-
     case 0:
         Page = PageOperationsWithTables;
         break;
@@ -322,7 +326,7 @@ int ShowPageMoveTable()
 
 int ShowPageAddColumn()
 {
-    printf(TextColumnNames);
+    printf(TextColumnName);
     char inputedColumnNames[MaxColumnNameLenght];
     fgets(inputedColumnNames, MaxColumnNameLenght, stdin);
     fflush(stdin); // clear input stream
@@ -331,6 +335,22 @@ int ShowPageAddColumn()
     inputedColumnNames[strlen(inputedColumnNames) - 1] = '\0';
 
     AddColumn(FindTablePositionByIndex(SelectedTableIndex), inputedColumnNames);
+
+    Page = PageOperationsWithSingleTable;
+    return 0;
+}
+
+int ShowPageAddRow()
+{
+    printf(TextRowRecords);
+    char inputedRowRecords[MaxCellTextLenght*MaxNumberOfColumns+MaxNumberOfColumns];
+    fgets(inputedRowRecords, MaxCellTextLenght*MaxNumberOfColumns+MaxNumberOfColumns, stdin);
+    fflush(stdin); // clear input stream
+
+    // remove Enter
+    inputedRowRecords[strlen(inputedRowRecords) - 1] = '\0';
+
+    AddRow(FindTablePositionByIndex(SelectedTableIndex), inputedRowRecords);
 
     Page = PageOperationsWithSingleTable;
     return 0;

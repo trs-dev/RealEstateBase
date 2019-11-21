@@ -13,13 +13,15 @@ char* TextChangeLanguage = "Choose your language: \n 1 - English\n 2 - Ukrainian
 
 
 char* TextOperationsWithTables = "Operations with tables: \n 1 - Show tables list and choose table\n 2 - Add new table \n 0 - Exit:\n";
-char* TextOperationsWithSingleTable = "Operations with table [%s]: \n 1 - Display all data\n 2 - Edit, remove or move columns \n 3 - Rename table \n 4 - Move table \n 5 - Add columns \n 6 - Delete table \n 0 - Return:\n";
+char* TextOperationsWithSingleTable = "Operations with table [%s]: \n 1 - Display all data\n 2 - Add row \n 3 - Edit, remove or move columns \n 4 - Rename table \n 5 - Move table \n 6 - Add columns \n 7 - Delete table \n 0 - Return:\n";
 
 
 
 
 char* TextTableName = "Table name: ";
 char* TextColumnNames = "Column names: ";
+char* TextColumnName = "Column name: ";
+char* TextRowRecords = "Enter row records: ";
 
 char* TextRenamingTable = "Renaming of table [%s]\n";
 char* TextNewName = "New name: ";

@@ -107,12 +107,17 @@ void ShowTable(int TablePosition, int CurrentColumn, int CurrentRow, int StartFr
     //print rows
     for (int r = StartFromRow; r<=StartFromRow+TableHeight(); r++)
     {
+        if (r == CurrentRow)
+            printf(">");
+        else
+            printf(" ");
+
         int rowPos = FindRowPositionByIndex(TablePosition, r);
         if (rowPos<0)
             break;
         for (int i = 1; i<= currentNumberOfColumns; i++)
         {
-            int pos = FindColumnPositionByIndex(TablePosition, i+StartFromColumn);
+            int pos = FindColumnPositionByIndex(TablePosition, i+StartFromColumn-1);
             if (pos<0)
                 break;
             if (Tables[TablePosition].Columns[pos].Type == ValTEXT)
@@ -126,7 +131,7 @@ void ShowTable(int TablePosition, int CurrentColumn, int CurrentRow, int StartFr
                 printf(format, Tables[TablePosition].Rows[rowPos].Records[pos].ValNUM);        // print formated record
             }
         }
-        printf("|\n ");
+        printf("|\n");
     }
     PrintLine('=',currentTableWidth+1);
 
@@ -161,7 +166,7 @@ void DisplayTable(int TablePosition)
             if(CurrentRow < NumberOfRows(TablePosition))
             {
                 CurrentRow++;
-                if (StartFromRow + TableHeight() > CurrentRow)
+                if (StartFromRow + TableHeight() < CurrentRow)
                     StartFromRow++;
                 ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
             }

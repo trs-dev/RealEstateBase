@@ -23,6 +23,8 @@ char* TextOperationsWithSingleTable;
 
 char* TextTableName;
 char* TextColumnNames;
+char* TextColumnName;
+char* TextRowRecords;
 
 char* TextRenamingTable;
 char* TextNewName;

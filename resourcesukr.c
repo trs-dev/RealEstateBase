@@ -11,7 +11,7 @@ void CommandLineParametersUKR() //Command Line Parameters for current language
     SetConsoleOutputCP(1251);
 }
 void TranslateToUKR() //
-{
+{/*
 TextWelcome = "Доброго дня! Вітаємо в базі нерухомого майна.\n";
 TextChangeLanguage = "Choose your language: \n 1 - English\n 2 - Ukrainian\n 0 - Exit:\n";
 TextOperationsWithTables = "Операції з таблицями: \n 1 - Показати список таблиць і вибрати таблицю \n 2 - Створити таблицю \n 0 - Вихід:\n";
@@ -43,5 +43,5 @@ TextTooManyTables = "В базі даних досягнуто максимальної кількості таблиць. Вида
 
 
 
-
+*/
 }
