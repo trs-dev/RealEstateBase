@@ -35,9 +35,17 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="commands.h" />
+		<Unit filename="display.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="display.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="navigate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="navigate.h" />
 		<Unit filename="resources.c">
 			<Option compilerVar="CC" />
 		</Unit>

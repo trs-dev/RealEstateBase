@@ -21,6 +21,13 @@ union Record
     CellNumericType ValNUM;
 };
 
+struct TableRow
+{
+    union Record Records[MaxNumberOfColumns];
+    int Index;
+} TableRow;
+
+
 struct TableColumn
 {
     char Name[MaxColumnNameLenght];
@@ -33,10 +40,10 @@ struct Table
     char Name[MaxTableNameLenght];
     int Index;
     struct TableColumn Columns[MaxNumberOfColumns];
-    union Record Cells[MaxNumberOfColumns][MaxNumberOfRows];
+    struct TableRow Rows[MaxNumberOfRows];
 } Table;
 
-struct Table Tables[]; //main database
+struct Table Tables[MaxNumberOfTables]; //main database
 
 int NumberOfTables ();
 int NumberOfColumns (int TablePosition);

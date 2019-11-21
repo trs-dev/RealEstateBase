@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1573681165 source:c:\dropbox\c_projects\realestatebase\main.c
+1574165134 source:c:\dropbox\c_projects\realestatebase\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -8,10 +8,11 @@
 	"resourcesukr.h"
 	"tablesdefinition.h"
 	"commands.h"
+	"navigate.h"
 
-1573680363 c:\dropbox\c_projects\realestatebase\resources.h
+1574342123 c:\dropbox\c_projects\realestatebase\resources.h
 
-1573680349 source:c:\dropbox\c_projects\realestatebase\resources.c
+1574342105 source:c:\dropbox\c_projects\realestatebase\resources.c
 	<stdio.h>
 	<stdlib.h>
 
@@ -41,7 +42,7 @@
 
 1573154036 c:\dropbox\c_projects\realestatebase\resourcesukr.h
 
-1573680502 source:c:\dropbox\c_projects\realestatebase\commands.c
+1574342666 source:c:\dropbox\c_projects\realestatebase\commands.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -65,10 +66,37 @@
 	<stdio.h>
 	<stdlib.h>
 
-1573153621 source:c:\dropbox\c_projects\realestatebase\tablesdefinition.c
+1573986749 source:c:\dropbox\c_projects\realestatebase\tablesdefinition.c
 	"tablesdefinition.h"
 
 1573123097 c:\dropbox\c_projects\realestatebase\tablesdefinition.c
 
-1573807796 c:\dropbox\c_projects\realestatebase\tablesdefinition.h
+1573988123 c:\dropbox\c_projects\realestatebase\tablesdefinition.h
+
+1573978179 source:c:\dropbox\c_projects\realestatebase\menu.c
+	<windows.h>
+	"resources.h"
+	"menu.h"
+	"commands.h"
+
+1573978179 c:\dropbox\c_projects\realestatebase\menu.h
+
+1574238748 source:c:\dropbox\c_projects\realestatebase\display.c
+	<windows.h>
+	"resources.h"
+	"commands.h"
+	"tablesdefinition.h"
+
+1574335319 source:c:\dropbox\c_projects\realestatebase\navigate.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"resources.h"
+	"resourcesukr.h"
+	"tablesdefinition.h"
+	"commands.h"
+	"navigate.h"
+
+1574343638 c:\dropbox\c_projects\realestatebase\navigate.h
 

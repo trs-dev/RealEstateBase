@@ -75,7 +75,10 @@ int OpenDB (char* FileName)
 
 
 //Tables Commands
-
+int CanCreateTable ()
+{
+    return NumberOfTables() < MaxNumberOfTables;
+}
 int CreateTable (char* TableName, char* ColumnNames)
 {
     if(!CanCreateTable())
@@ -122,10 +125,6 @@ int CreateTable (char* TableName, char* ColumnNames)
     printf(TextCreateTableSuccess, TableName);
     return 0;
 }
-int CanCreateTable ()
-{
-    return NumberOfTables() < MaxNumberOfTables;
-}
 
 int DeleteTable (int TablePosition)
 {
@@ -134,8 +133,9 @@ int DeleteTable (int TablePosition)
 
     int oldTableIndex = Tables[TablePosition].Index;
 
-    Tables[TablePosition].Index = 0;
-    strcpy(Tables[TablePosition].Name, "\0");
+    //Tables[TablePosition].Index = 0;
+    //strcpy(Tables[TablePosition].Name, "\0");
+    memset(&Tables[TablePosition], 0, sizeof(Table));
 
     //shift indexes of tables
     for (int i = 0; i<MaxNumberOfTables; i++)
@@ -159,8 +159,9 @@ int RenameTable (int TablePosition, char* NewTableName)
     return 0;
 }
 
-int MoveTable (int OldTableIndex, int NewTableIndex)
+int MoveTable (int TablePosition, int NewTableIndex)
 {
+    int OldTableIndex = Tables[TablePosition].Index;
     int shiftDirection = 1;
     if (OldTableIndex < NewTableIndex)
     {
@@ -184,6 +185,168 @@ int MoveTable (int OldTableIndex, int NewTableIndex)
     return 0;
 }
 
+//Columns Commands
+int CanAddColumn (int TablePosition)
+{
+    return NumberOfColumns(TablePosition) < MaxNumberOfColumns;
+}
+int AddColumn (int TablePosition, char* ColumnName)
+{
+    if(!CanAddColumn(TablePosition))
+    {
+         printf(TextTooManyColumns);
+         return 0;
+    }
+    // find position for new column
+    int newColumnPosition = -1;
+    for (int i = 0; i<MaxNumberOfColumns; i++)
+    {
+       if (Tables[TablePosition].Columns[i].Name[0]=='\0')
+       {
+           newColumnPosition = i;
+           break;
+       }
+    }
+    Tables[TablePosition].Columns[newColumnPosition].Index = NumberOfColumns(TablePosition)+1;
+    strcpy(Tables[TablePosition].Columns[newColumnPosition].Name, ColumnName);
+    printf(TextCreateColumnSuccess, ColumnName);
+    return 0;
+}
+
+int DeleteColumn (int TablePosition, int ColumnPosition)
+{
+    char oldColumnName[MaxColumnNameLenght];
+    strcpy(oldColumnName, Tables[TablePosition].Columns[ColumnPosition].Name);
+
+    int oldColumnIndex = Tables[TablePosition].Columns[ColumnPosition].Index;
+
+    Tables[TablePosition].Columns[ColumnPosition].Index = 0;
+    strcpy(Tables[TablePosition].Columns[ColumnPosition].Name, "\0");
+
+    for (int i = 0; i<MaxNumberOfRows; i++)
+    {
+        strcpy(Tables[TablePosition].Rows[i].Records[ColumnPosition].ValTEXT, "\0");
+    }
+
+    //shift indexes of columns
+    for (int i = 0; i<MaxNumberOfColumns; i++)
+    {
+       if (Tables[TablePosition].Columns[i].Index > oldColumnIndex)
+       {
+           Tables[TablePosition].Columns[i].Index--;
+       }
+    }
+
+    printf(TextDeleteColumnSuccess, oldColumnName);
+    return 0;
+}
+
+int RenameColumn (int TablePosition, int ColumnPosition, char* NewColumnName)
+{
+    char oldColumnName[MaxColumnNameLenght];
+    strcpy(oldColumnName, Tables[TablePosition].Columns[ColumnPosition].Name);
+    strcpy(Tables[TablePosition].Columns[ColumnPosition].Name, NewColumnName);
+    printf(TextRenameColumnSuccess, oldColumnName, NewColumnName);
+    return 0;
+}
+
+int MoveColumn (int TablePosition, int ColumnPosition, int NewColumnIndex)
+{
+    int OldColumnIndex = Tables[TablePosition].Columns[ColumnPosition].Index;
+    int shiftDirection = 1;
+    if (OldColumnIndex < NewColumnIndex)
+    {
+        shiftDirection = -1;
+    }
+    //shift indexes of columns
+    for (int i = 0; i<MaxNumberOfColumns; i++)
+    {
+        if (Tables[TablePosition].Columns[i].Index == OldColumnIndex)
+        {
+            Tables[TablePosition].Columns[i].Index = NewColumnIndex;
+        }
+        else if (((Tables[TablePosition].Columns[i].Index > min(OldColumnIndex, NewColumnIndex)) && (Tables[TablePosition].Columns[i].Index < max(OldColumnIndex, NewColumnIndex)))
+                 || (Tables[TablePosition].Columns[i].Index==NewColumnIndex))
+        {
+            Tables[TablePosition].Columns[i].Index += shiftDirection;
+        }
+    }
+
+    return 0;
+}
+
+//Rows Commands
+int CanAddRow (int TablePosition)
+{
+    return NumberOfRows(TablePosition) < MaxNumberOfRows;
+}
+int AddRow (int TablePosition)
+{
+    if(!CanAddRow(TablePosition))
+    {
+         printf(TextTooManyRows);
+         return 0;
+    }
+    // find position for new row
+    int newRowPosition = -1;
+    for (int i = 0; i<MaxNumberOfRows; i++)
+    {
+       if (Tables[TablePosition].Rows[i].Index <= 0)
+       {
+           newRowPosition = i;
+           break;
+       }
+    }
+    Tables[TablePosition].Rows[newRowPosition].Index = NumberOfRows(TablePosition)+1;
+    printf(TextCreateRowSuccess);
+    return 0;
+}
+
+int DeleteRow (int TablePosition, int RowPosition)
+{
+    int oldRowIndex = Tables[TablePosition].Rows[RowPosition].Index;
+    Tables[TablePosition].Rows[RowPosition].Index = 0;
 
 
+    for (int i = 0; i<MaxNumberOfRows; i++)
+    {
+        strcpy(Tables[TablePosition].Rows[RowPosition].Records[i].ValTEXT, "\0");
+    }
 
+    //shift indexes of rows
+    for (int i = 0; i<MaxNumberOfRows; i++)
+    {
+       if (Tables[TablePosition].Rows[i].Index > oldRowIndex)
+       {
+           Tables[TablePosition].Rows[i].Index--;
+       }
+    }
+
+    printf(TextDeleteRowSuccess, oldRowIndex);
+    return 0;
+}
+
+int MoveRow (int TablePosition, int RowPosition, int NewRowIndex)
+{
+    int OldRowIndex = Tables[TablePosition].Rows[RowPosition].Index;
+    int shiftDirection = 1;
+    if (OldRowIndex < NewRowIndex)
+    {
+        shiftDirection = -1;
+    }
+    //shift indexes of columns
+    for (int i = 0; i<MaxNumberOfColumns; i++)
+    {
+        if (Tables[TablePosition].Rows[i].Index == OldRowIndex)
+        {
+            Tables[TablePosition].Rows[i].Index = NewRowIndex;
+        }
+        else if (((Tables[TablePosition].Rows[i].Index > min(OldRowIndex, NewRowIndex)) && (Tables[TablePosition].Rows[i].Index < max(OldRowIndex, NewRowIndex)))
+                 || (Tables[TablePosition].Rows[i].Index==NewRowIndex))
+        {
+            Tables[TablePosition].Rows[i].Index += shiftDirection;
+        }
+    }
+
+    return 0;
+}

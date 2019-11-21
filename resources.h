@@ -5,6 +5,15 @@ void CommandLineParameters();
 
 char* TextWelcome;
 char* TextChangeLanguage;
+
+char* TextLanguageEnglish;
+char* TextLanguageUkrainian;
+char* TextExit;
+
+
+
+
+
 char* TextOperationsWithTables;
 char* TextOperationsWithSingleTable;
 
@@ -28,7 +37,14 @@ char* TextDeleteTableSuccess;
 char* TextRenameTableSuccess;
 
 char* TextNoColumnsInTable;
+char* TextTooManyColumns;
+char* TextCreateColumnSuccess;
+char* TextDeleteColumnSuccess;
+char* TextRenameColumnSuccess;
 
+char* TextTooManyRows;
+char* TextCreateRowSuccess;
+char* TextDeleteRowSuccess;
 
 
 char* TextOpenFileError;
