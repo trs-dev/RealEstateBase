@@ -193,7 +193,7 @@ int ShowPageChangeLanguage()
         Page = PageOperationsWithTables;
         DatabaseName = "DatabaseUKR.dat";
         OpenDB(DatabaseName);
-        ParseCommand("SELECT Кількість кімнат, Площа (кв.м.), Поверх, Відстань від центру, місто_ід, Вулиця, Ціна (грн) FROM Продаж квартир JOIN Міста ON місто_ід = Id WHERE Поверх = 1 AND Площа (кв.м.) > 50 AND Ціна (грн) < 1000000 AND Місто = Івано-Франківськ");
+        ParseCommand("SELECT Кількість кімнат, Площа (кв.м.), Поверх, Відстань від центру, місто_ід, Вулиця, Ціна (грн) FROM Продаж квартир JOIN Міста ON місто_ід = Id WHERE Поверх > 1 AND Площа (кв.м.) > 70 AND Ціна (грн) < 1000000 AND Місто = Івано-Франківськ");
         DisplayFilteredTable();
         break;
         ////////////////////////////////////////////////test!!!!!!!!!!!!!!!!!!!!!!!!!

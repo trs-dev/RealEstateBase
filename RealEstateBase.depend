@@ -90,7 +90,7 @@
 	"filteredtablesdefinition.h"
 	"display.h"
 
-1575292031 source:c:\dropbox\c_projects\realestatebase\navigate.c
+1575313777 source:c:\dropbox\c_projects\realestatebase\navigate.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -103,7 +103,7 @@
 
 1574367769 c:\dropbox\c_projects\realestatebase\navigate.h
 
-1575309091 source:c:\dropbox\c_projects\realestatebase\displaycommands.c
+1575313817 source:c:\dropbox\c_projects\realestatebase\displaycommands.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

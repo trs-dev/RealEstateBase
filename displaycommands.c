@@ -247,14 +247,8 @@ int ParseCommandWhere (char whereParameters[(MaxColumnNameLenght*2+8)*MaxNumberO
         else
             break;
     }
-
     return 0;
 }
-
-
-
-
-
 
 
 int Select (int ColumnsPosition[MaxNumberOfColumns], int TablePosition)
@@ -327,10 +321,47 @@ int Join(int BaseColumnPosition, int JoinedTablePosition, int JoinedColumnPositi
 
 int Where(char ColumnName[MaxColumnNameLenght], enum Conditions Condition, char value[MaxCellTextLenght])
 {
+    int columnPosition = FindFilteredTableColumnPositionByName(ColumnName);
 
+    switch(Condition)
+    {
+    case Equal:
+        for (int i = 0; i < MaxNumberOfRows; i++)
+        {
+             if ((FilteredTable.Columns[columnPosition].Type == ValTEXT &&
+                 strcmp(FilteredTable.Rows[i].Records[columnPosition].ValTEXT, value))||
+                 (FilteredTable.Columns[columnPosition].Type == ValNUM &&
+                 FilteredTable.Rows[i].Records[columnPosition].ValNUM != atoi(value)))
+                 FilteredTable.Rows[i].Index = 0;
+        }
+        break;
+    case More:
+        for (int i = 0; i < MaxNumberOfRows; i++)
+        {
+            if (!(FilteredTable.Rows[i].Records[columnPosition].ValNUM > atoi(value)))
+                FilteredTable.Rows[i].Index = 0;
+        }
+        break;
+    case Less:
+        for (int i = 0; i < MaxNumberOfRows; i++)
+        {
+            if (!(FilteredTable.Rows[i].Records[columnPosition].ValNUM < atoi(value)))
+                FilteredTable.Rows[i].Index = 0;
+        }
+        break;
+    }
 
+    //fixing FilteredTable indexes
 
-
+    int index = 1;
+    for (int i = 0; i < MaxNumberOfRows; i++)
+    {
+        if (FilteredTable.Rows[i].Index>0)
+        {
+            FilteredTable.Rows[i].Index = index;
+            index++;
+        }
+    }
 }
 
 
