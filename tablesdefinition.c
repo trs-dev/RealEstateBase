@@ -56,6 +56,18 @@ int FindColumnPositionByIndex (int TablePosition, int ColumnIndex)
     return -1;
 }
 
+int FindColumnPositionByName (int TablePosition, char ColumnName[MaxColumnNameLenght])
+{
+    for (int i = 0; i<MaxNumberOfColumns; i++)
+    {
+        if (strcmp(Tables[TablePosition].Columns[i].Name, ColumnName)==0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 int FindRowPositionByIndex (int TablePosition, int RowIndex)
 {
     for (int i = 0; i<MaxNumberOfRows; i++)

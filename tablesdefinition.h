@@ -47,6 +47,7 @@ struct Table Tables[MaxNumberOfTables]; //main database
 
 int NumberOfTables ();
 int NumberOfColumns (int TablePosition);
+int NumberOfRows (int TablePosition);
 int FindTablePositionByIndex (int TableIndex);
 int FindColumnPositionByIndex (int TableIndex, int ColumnIndex);
 

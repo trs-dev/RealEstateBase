@@ -39,6 +39,13 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="display.h" />
+		<Unit filename="displaycommands.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="filteredtablesdefinition.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="filteredtablesdefinition.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -22,6 +22,7 @@ char* TextTableName = "Table name: ";
 char* TextColumnNames = "Column names: ";
 char* TextColumnName = "Column name: ";
 char* TextRowRecords = "Enter row records: ";
+char* TextNewValue = "Enter new value: ";
 
 char* TextRenamingTable = "Renaming of table [%s]\n";
 char* TextNewName = "New name: ";

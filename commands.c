@@ -8,22 +8,6 @@
 #define max(x, y) ( (x) > (y) ? (x) : (y) )
 #define min(x, y) ( (x) < (y) ? (x) : (y) )
 
-/*
-int StartWith(const char *str, const char *prefix)
-{
-    return strncmp(prefix, str, strlen(prefix)) == 0;
-}
-
-
-int ParseCommand (char* InputedText)
-{
-    if (StartWith(InputedText, "CREATE TABLE"))
-        {
-        }
-    return 0;
-}
-*/
-
 
 //Database Commands
 int SaveDB (char* FileName)
@@ -102,10 +86,13 @@ int CreateTable (char* TableName, char* ColumnNames)
     //parser for column names
     int columnIndex = 0;
     char *partOfStr;
-    partOfStr = strtok(ColumnNames,"/"); // get first column name
+    partOfStr = strtok(ColumnNames,","); // get first column name
 
     while (partOfStr != NULL)
    {
+       if (partOfStr[0]==' ')
+           partOfStr +=1; // delete first symbol
+
        if (partOfStr[0]=='$') // Integer Column
        {
            partOfStr +=1; // delete first symbol
@@ -119,7 +106,7 @@ int CreateTable (char* TableName, char* ColumnNames)
       strcpy(Tables[newTablePosition].Columns[columnIndex].Name, partOfStr); // Set Column name
 
       Tables[newTablePosition].Columns[columnIndex].Index = columnIndex+1;
-      partOfStr = strtok (NULL,"/"); // get next column name
+      partOfStr = strtok (NULL,","); // get next column name
       columnIndex++;
    }
     printf(TextCreateTableSuccess, TableName);
@@ -133,9 +120,9 @@ int DeleteTable (int TablePosition)
 
     int oldTableIndex = Tables[TablePosition].Index;
 
-    //Tables[TablePosition].Index = 0;
     //strcpy(Tables[TablePosition].Name, "\0");
     memset(&Tables[TablePosition], 0, sizeof(Table));
+    Tables[TablePosition].Index = 0;
 
     //shift indexes of tables
     for (int i = 0; i<MaxNumberOfTables; i++)
@@ -208,6 +195,16 @@ int AddColumn (int TablePosition, char* ColumnName)
        }
     }
     Tables[TablePosition].Columns[newColumnPosition].Index = NumberOfColumns(TablePosition)+1;
+
+     if (ColumnName[0]=='$') // Integer Column
+       {
+           ColumnName +=1; // delete first symbol
+           Tables[TablePosition].Columns[newColumnPosition].Type = ValNUM;// Integer Column
+       }
+       else
+       {
+           Tables[TablePosition].Columns[newColumnPosition].Type = ValTEXT;// Text Column
+       }
     strcpy(Tables[TablePosition].Columns[newColumnPosition].Name, ColumnName);
     printf(TextCreateColumnSuccess, ColumnName);
     return 0;
@@ -302,10 +299,13 @@ int AddRow (int TablePosition, char* Records)
     //parser for records
     int columnIndex = 1;
     char *partOfStr;
-    partOfStr = strtok(Records,"/"); // get first record
+    partOfStr = strtok(Records,","); // get first record
 
     while (partOfStr != NULL)
    {
+        if (partOfStr[0]==' ')
+            partOfStr +=1; // delete first symbol
+
        int columnPosition = FindColumnPositionByIndex(TablePosition, columnIndex);
        if (Tables[TablePosition].Columns[columnPosition].Type == ValNUM) // Integer Column
        {
@@ -315,7 +315,7 @@ int AddRow (int TablePosition, char* Records)
        {
            strcpy(Tables[TablePosition].Rows[newRowPosition].Records[columnPosition].ValTEXT, partOfStr);
        }
-      partOfStr = strtok (NULL,"/"); // get next column name
+      partOfStr = strtok (NULL,","); // get next column name
       columnIndex++;
    }
 
@@ -369,6 +369,21 @@ int MoveRow (int TablePosition, int RowPosition, int NewRowIndex)
             Tables[TablePosition].Rows[i].Index += shiftDirection;
         }
     }
+
+    return 0;
+}
+
+int SetValue (int TablePosition, int RowPosition, int ColumnPosition, char* NewValue)
+{
+
+    if (Tables[TablePosition].Columns[ColumnPosition].Type == ValNUM) // Integer Column
+       {
+           Tables[TablePosition].Rows[RowPosition].Records[ColumnPosition].ValNUM = atoi(NewValue);
+       }
+    else
+       {
+           strcpy(Tables[TablePosition].Rows[RowPosition].Records[ColumnPosition].ValTEXT, NewValue);
+       }
 
     return 0;
 }

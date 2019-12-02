@@ -178,8 +178,30 @@ int ShowPageChangeLanguage()
     switch(MenuIndex)
     {
     case 1:
+        //Page = PageOperationsWithTables;
+        //OpenDB(DatabaseName);
+
+
+
+
+
+
+        ////////////////////////////////////////////////test!!!!!!!!!!!!!!!!!!!!!!!!!
+                CommandLineParametersUKR();
+        TranslateToUKR();
+        printf(TextWelcome);
         Page = PageOperationsWithTables;
+        DatabaseName = "DatabaseUKR.dat";
         OpenDB(DatabaseName);
+        ParseCommand("SELECT Кількість кімнат, Площа (кв.м.), Поверх, Відстань від центру, місто_ід, Вулиця, Ціна (грн) FROM Продаж квартир JOIN Міста ON місто_ід = Id WHERE Поверх = 1 AND Площа (кв.м.) > 50 AND Ціна (грн) < 1000000 AND Місто = Івано-Франківськ");
+        DisplayFilteredTable();
+        break;
+        ////////////////////////////////////////////////test!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
         break;
     case 2:
         CommandLineParametersUKR();
@@ -262,7 +284,7 @@ int ShowPageOperationsWithSingleTable()
     switch(MenuIndex)
     {
     case 1:
-        DisplayTable(FindTablePositionByIndex(SelectedTableIndex));
+        EditTable(FindTablePositionByIndex(SelectedTableIndex));
         break;
     case 2:
         //add row

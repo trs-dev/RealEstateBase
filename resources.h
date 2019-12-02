@@ -25,6 +25,7 @@ char* TextTableName;
 char* TextColumnNames;
 char* TextColumnName;
 char* TextRowRecords;
+char* TextNewValue;
 
 char* TextRenamingTable;
 char* TextNewName;
