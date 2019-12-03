@@ -27,7 +27,7 @@ TextColumnName = "Назва стовпця: ";
 TextRowRecords= "Введіть дані записів (через кому): ";
 TextNewValue = "Введіть нове значення: ";
 TextNewColumnName = "Введіть нову назву стовпця: ";
-char* TextEnterSelectCommand = "Введіть команду вибору (SELECT). \nВигляд: SELECT Стовпець1, Стовпець2... чи * FROM Таблиця1 JOIN Таблиця2 ON СтовпецьТаблиці1 = СтовпецьТаблиці2 \n        WHERE Стовпець1><= Значення1 AND Стовпець2 ><= Значення2 ORDER BY Стовпець1 ASC/DESC, Стовпець2 ASC/DESC, ...\n";
+TextEnterSelectCommand = "Введіть команду вибору (SELECT). \nВигляд: SELECT Стовпець1, Стовпець2... чи * FROM Таблиця1 JOIN Таблиця2 ON СтовпецьТаблиці1 = СтовпецьТаблиці2 \n        WHERE Стовпець1><= Значення1 AND Стовпець2 ><= Значення2 ORDER BY Стовпець1 ASC/DESC, Стовпець2 ASC/DESC, ...\n";
 
 TextRenamingTable = "Перейменування таблиці [%s]\n";
 TextNewName = "Нова назва: ";
