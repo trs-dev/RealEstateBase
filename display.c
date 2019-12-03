@@ -18,7 +18,6 @@ void PrintLine(char Symbol, int Lenght)
 {
     for (int i=1; i<=Lenght; i++)
         printf("%c", Symbol);
-
     printf("\n");
 }
 
@@ -56,9 +55,7 @@ int ColumnWidth(int TablePosition, int ColumnPosition)
     {
         int maxVal = 0;
         for (int i=1;i<=NumberOfRows(TablePosition); i++)
-        {
            maxVal = max(maxVal, abs(Tables[TablePosition].Rows[FindRowPositionByIndex(TablePosition,i)].Records[ColumnPosition].ValNUM));
-        }
 
         char str[13];
         sprintf(str, "%d", maxVal);
@@ -68,9 +65,7 @@ int ColumnWidth(int TablePosition, int ColumnPosition)
     else if (Tables[TablePosition].Columns[ColumnPosition].Type == ValTEXT)
     {
         for (int i=1;i<=NumberOfRows(TablePosition); i++)
-        {
            result = max(result, strlen(Tables[TablePosition].Rows[FindRowPositionByIndex(TablePosition,i)].Records[ColumnPosition].ValTEXT));
-        }
     }
     return result;
 }
@@ -85,9 +80,7 @@ int FilteredTableColumnWidth(int ColumnPosition)
     {
         int maxVal = 0;
         for (int i=1;i<=MaxNumberOfRows; i++)
-        {
            maxVal = max(maxVal, abs(FilteredTable.Rows[i].Records[ColumnPosition].ValNUM));
-        }
 
         char str[13];
         sprintf(str, "%d", maxVal);
@@ -97,9 +90,7 @@ int FilteredTableColumnWidth(int ColumnPosition)
     else if (FilteredTable.Columns[ColumnPosition].Type == ValTEXT)
     {
         for (int i=1;i<=MaxNumberOfRows; i++)
-        {
            result = max(result, strlen(FilteredTable.Rows[i].Records[ColumnPosition].ValTEXT));
-        }
     }
     return result;
 }
@@ -110,9 +101,7 @@ void ShowTable(int TablePosition, int CurrentColumn, int CurrentRow, int StartFr
 {
     int columnsWidth [MaxNumberOfColumns];
     for (int i = 0; i< MaxNumberOfColumns; i++)
-    {
         columnsWidth[i] = ColumnWidth(TablePosition, i);
-    }
     system("cls");
     printf("\t%s\n ",Tables[TablePosition].Name);
     PrintLine('-', ConsoleWidth);
@@ -167,6 +156,7 @@ void ShowTable(int TablePosition, int CurrentColumn, int CurrentRow, int StartFr
     }
     printf("   ");
     PrintLine('=',currentTableWidth+1);
+    printf(TextEditTableTips);
 
 }
 
@@ -192,6 +182,7 @@ void EditTable(int TablePosition)
                 ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
             }
         }
+
         if(GetAsyncKeyState(VK_DOWN))
         {
             keybd_event(VK_DOWN, 0, KEYEVENTF_KEYUP, 0);
@@ -226,6 +217,59 @@ void EditTable(int TablePosition)
             }
         }
 
+        if(GetAsyncKeyState('W') && GetAsyncKeyState(VK_CONTROL))
+        {
+            keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
+            keybd_event('W', 0, KEYEVENTF_KEYUP, 0);
+            if(CurrentRow > 1)
+            {
+                MoveRow (TablePosition, FindRowPositionByIndex(TablePosition, CurrentRow), CurrentRow-1);
+                CurrentRow--;
+                if (StartFromRow > CurrentRow)
+                    StartFromRow = CurrentRow;
+                ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
+            }
+        }
+        if(GetAsyncKeyState('S') && GetAsyncKeyState(VK_CONTROL))
+        {
+            keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
+            keybd_event('S', 0, KEYEVENTF_KEYUP, 0);
+            if(CurrentRow < NumberOfRows(TablePosition))
+            {
+                MoveRow (TablePosition, FindRowPositionByIndex(TablePosition, CurrentRow), CurrentRow+1);
+                CurrentRow++;
+                if (StartFromRow + TableHeight() < CurrentRow)
+                    StartFromRow++;
+                ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
+            }
+        }
+
+        if(GetAsyncKeyState('A') && GetAsyncKeyState(VK_CONTROL))
+        {
+            keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
+            keybd_event('A', 0, KEYEVENTF_KEYUP, 0);
+            if(CurrentColumn > 1)
+            {
+                MoveColumn (TablePosition, FindColumnPositionByIndex(TablePosition, CurrentColumn), CurrentColumn-1);
+                CurrentColumn--;
+                if (StartFromColumn > CurrentColumn)
+                    StartFromColumn = CurrentColumn;
+                ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
+            }
+        }
+        if(GetAsyncKeyState('D') && GetAsyncKeyState(VK_CONTROL))
+        {
+            keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
+            keybd_event('D', 0, KEYEVENTF_KEYUP, 0);
+            if(CurrentColumn < NumberOfColumns(TablePosition))
+            {
+                MoveColumn (TablePosition, FindColumnPositionByIndex(TablePosition, CurrentColumn), CurrentColumn+1);
+                CurrentColumn++;
+                StartFromColumn++;
+                ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
+            }
+        }
+
         if(GetAsyncKeyState('E') && GetAsyncKeyState(VK_CONTROL))
         {
             keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
@@ -240,6 +284,20 @@ void EditTable(int TablePosition)
             SetValue (TablePosition, FindRowPositionByIndex(TablePosition, CurrentRow), FindColumnPositionByIndex(TablePosition, CurrentColumn), inputedRowRecord);
             ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
         }
+        if(GetAsyncKeyState('T') && GetAsyncKeyState(VK_CONTROL))
+        {
+            keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
+            keybd_event('T', 0, KEYEVENTF_KEYUP, 0);
+            printf(TextNewColumnName);
+            keybd_event(VK_ESCAPE, 0, 0, 0);               //press ESCAPE to clear line
+            keybd_event(VK_ESCAPE, 0, KEYEVENTF_KEYUP, 0); //release ESCAPE
+            char inputedColumnName[MaxColumnNameLenght];
+            fgets(inputedColumnName, MaxColumnNameLenght, stdin);
+            fflush(stdin); // clear input stream
+            inputedColumnName[strlen(inputedColumnName) - 1] = '\0';// remove Enter
+            RenameColumn (TablePosition, FindColumnPositionByIndex(TablePosition, CurrentColumn), inputedColumnName);
+            ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
+        }
 
         if(GetAsyncKeyState('X') && GetAsyncKeyState(VK_CONTROL))
         {
@@ -250,6 +308,17 @@ void EditTable(int TablePosition)
                 CurrentRow--;
             if (StartFromRow > CurrentRow)
                 StartFromRow = CurrentRow;
+            ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
+        }
+        if(GetAsyncKeyState('R') && GetAsyncKeyState(VK_CONTROL))
+        {
+            keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
+            keybd_event('R', 0, KEYEVENTF_KEYUP, 0);
+            DeleteColumn(TablePosition, FindColumnPositionByIndex(TablePosition, CurrentColumn));
+            if (CurrentColumn>1)
+                CurrentColumn--;
+            if (StartFromColumn> CurrentColumn)
+                StartFromColumn = CurrentColumn;
             ShowTable(TablePosition, CurrentColumn, CurrentRow, StartFromColumn, StartFromRow);
         }
         if(GetAsyncKeyState('Z') && GetAsyncKeyState(VK_CONTROL))

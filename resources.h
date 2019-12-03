@@ -10,22 +10,17 @@ char* TextLanguageEnglish;
 char* TextLanguageUkrainian;
 char* TextExit;
 
-
-
-
-
 char* TextOperationsWithTables;
 char* TextOperationsWithSingleTable;
-
-
-
-
+char* TextEditTableTips;
 
 char* TextTableName;
 char* TextColumnNames;
 char* TextColumnName;
 char* TextRowRecords;
 char* TextNewValue;
+char* TextNewColumnName;
+char* TextEnterSelectCommand;
 
 char* TextRenamingTable;
 char* TextNewName;
@@ -49,21 +44,11 @@ char* TextTooManyRows;
 char* TextCreateRowSuccess;
 char* TextDeleteRowSuccess;
 
-
 char* TextOpenFileError;
 
-
 char* TextReturn;
-
 
 char* TextInputError;
 char* TextTooManyInputErrors;
 char* TextTooManyTables;
-
-
-
-
-
-
-
 #endif // RESOURCES_H_INCLUDED

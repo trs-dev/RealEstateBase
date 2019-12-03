@@ -10,9 +10,11 @@
 #define max(x, y) ( (x) > (y) ? (x) : (y) )
 #define min(x, y) ( (x) < (y) ? (x) : (y) )
 
-#define minPos(x, y) ( ((x) < (y))&& (x>0) ? (x) : (y) )
+//minimum positive value
+#define minPos(x, y) ( (((x) < (y)) && (x>0)) || (y<=0) ? (x) : (y) )
 
 enum Conditions {Equal, More, Less};
+enum OrderVariants {ASC, DESC};
 
 int StartWith(const char *str, const char *prefix)
 {
@@ -93,6 +95,7 @@ int ParseCommand (char* InputedText)
             }
 
             //parse WHERE command
+            if (partWHERE != NULL)
             {
                 nextPosition = minPos(partORDERBYposition, strLen);
 
@@ -102,10 +105,15 @@ int ParseCommand (char* InputedText)
 
                 ParseCommandWhere(whereParameters);
             }
+            //parse ORDER BY command
+            if (partORDERBY != NULL)
+            {
+                char orderByParameters[(MaxColumnNameLenght+7)*MaxNumberOfColumns];
+                strncpy (orderByParameters, InputedText + partORDERBYposition + 10, strLen-partORDERBYposition-10);
+                orderByParameters[strLen-partORDERBYposition-10] = '\0';
 
-
-
-
+                ParseCommandOrderBy(orderByParameters);
+            }
         }
     return 0;
 }
@@ -251,6 +259,63 @@ int ParseCommandWhere (char whereParameters[(MaxColumnNameLenght*2+8)*MaxNumberO
 }
 
 
+int ParseCommandOrderBy (char Columns[(MaxColumnNameLenght+7)*MaxNumberOfColumns])
+{
+    int columnsPosition[MaxNumberOfColumns];
+    enum OrderVariants orderVariants[MaxNumberOfColumns];
+    for (int i=0; i<MaxNumberOfColumns; i++)
+        columnsPosition[i]=-1;
+
+
+        int columnPosition = 0;
+        char *partOfStr;
+        partOfStr = strtok(Columns,","); // get first column name
+
+        while (partOfStr != NULL)
+        {
+            if (partOfStr[0]==' ')
+                partOfStr +=1; // delete first symbol
+
+            int partOrderVariantPosition = 0;
+
+            char* partOrderVariant = strstr (partOfStr, " ASC");
+            if (partOrderVariant != NULL)
+            {
+                partOrderVariantPosition = partOrderVariant - partOfStr;
+                partOfStr[strlen(partOfStr)-4] = '\0';
+                orderVariants[columnPosition] = ASC;
+            }
+            partOrderVariant = strstr (partOfStr, " DESC");
+            if (partOrderVariant != NULL)
+            {
+                partOrderVariantPosition = partOrderVariant - partOfStr;
+                partOfStr[strlen(partOfStr)-5] = '\0';
+                orderVariants[columnPosition] = DESC;
+            }
+            if (partOrderVariantPosition == 0)
+                orderVariants[columnPosition] = ASC;
+
+            int poz = FindFilteredTableColumnPositionByName(partOfStr);
+            if (poz < 0)
+                return 1;
+            columnsPosition[columnPosition]=poz;
+            partOfStr = strtok (NULL,","); // get next column name
+            columnPosition++;
+        }
+
+
+    for (int i = MaxNumberOfColumns-1; i >= 0; i--)
+    {
+        if (columnsPosition[i]>=0)
+        OrderBy(columnsPosition[i], orderVariants[i]);
+    }
+
+    return 0;
+}
+
+
+
+
 int Select (int ColumnsPosition[MaxNumberOfColumns], int TablePosition)
 {
     memset(&FilteredTable, 0, sizeof(Table)); //clear FilteredTable
@@ -362,12 +427,36 @@ int Where(char ColumnName[MaxColumnNameLenght], enum Conditions Condition, char 
             index++;
         }
     }
+    return 0;
 }
 
 
-
-
-
+int OrderBy(int ColumnPosition, enum OrderVariants OrderVariant)
+{
+    int numberOfRows = FilteredTableNumberOfRows();
+    int tmp =0;
+    while(tmp>=0)
+    {
+        tmp = -1;
+        for(int i = 1 ; i < numberOfRows; i++)
+        {
+            int poz = FindFilteredTableRowPositionByIndex(i);
+            int pozNext = FindFilteredTableRowPositionByIndex(i+1);
+            if ((FilteredTable.Columns[ColumnPosition].Type == ValNUM &&
+                ((OrderVariant == ASC && FilteredTable.Rows[poz].Records[ColumnPosition].ValNUM > FilteredTable.Rows[pozNext].Records[ColumnPosition].ValNUM) ||
+                (OrderVariant == DESC && FilteredTable.Rows[poz].Records[ColumnPosition].ValNUM < FilteredTable.Rows[pozNext].Records[ColumnPosition].ValNUM)))
+                || (FilteredTable.Columns[ColumnPosition].Type == ValTEXT &&
+                ((OrderVariant == ASC && strcmp(FilteredTable.Rows[poz].Records[ColumnPosition].ValNUM, FilteredTable.Rows[pozNext].Records[ColumnPosition].ValNUM)>0) ||
+                (OrderVariant == DESC && strcmp(FilteredTable.Rows[poz].Records[ColumnPosition].ValNUM, FilteredTable.Rows[pozNext].Records[ColumnPosition].ValNUM)<0))))
+                {
+                    tmp = FilteredTable.Rows[poz].Index;
+                    FilteredTable.Rows[poz].Index = FilteredTable.Rows[pozNext].Index ;
+                    FilteredTable.Rows[pozNext].Index = tmp;
+                }
+        }
+    }
+    return 0;
+}
 
 
 

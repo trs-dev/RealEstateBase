@@ -178,30 +178,8 @@ int ShowPageChangeLanguage()
     switch(MenuIndex)
     {
     case 1:
-        //Page = PageOperationsWithTables;
-        //OpenDB(DatabaseName);
-
-
-
-
-
-
-        ////////////////////////////////////////////////test!!!!!!!!!!!!!!!!!!!!!!!!!
-                CommandLineParametersUKR();
-        TranslateToUKR();
-        printf(TextWelcome);
         Page = PageOperationsWithTables;
-        DatabaseName = "DatabaseUKR.dat";
         OpenDB(DatabaseName);
-        ParseCommand("SELECT Кількість кімнат, Площа (кв.м.), Поверх, Відстань від центру, місто_ід, Вулиця, Ціна (грн) FROM Продаж квартир JOIN Міста ON місто_ід = Id WHERE Поверх > 1 AND Площа (кв.м.) > 70 AND Ціна (грн) < 1000000 AND Місто = Івано-Франківськ");
-        DisplayFilteredTable();
-        break;
-        ////////////////////////////////////////////////test!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-
-
-
         break;
     case 2:
         CommandLineParametersUKR();
@@ -219,7 +197,7 @@ int ShowPageChangeLanguage()
 
 int ShowPageOperationsWithTables()
 {
-    MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 2, "");
+    MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 3, "");
 
     switch(MenuIndex)
     {
@@ -228,6 +206,16 @@ int ShowPageOperationsWithTables()
         break;
     case 2:
         Page = PageAddTable;
+        break;
+    case 3:
+        printf(TextEnterSelectCommand);
+        char inputedCommand[500];
+        fgets(inputedCommand, 500, stdin);
+        fflush(stdin); // clear input stream
+
+        inputedCommand[strlen(inputedCommand) - 1] = '\0';// remove Enter
+        ParseCommand(inputedCommand);
+        DisplayFilteredTable();
         break;
     case 0:
         SaveDB(DatabaseName);
@@ -247,7 +235,6 @@ int ShowPageAddTable()
     char inputedColumnNames[MaxColumnNameLenght*MaxNumberOfColumns+MaxNumberOfColumns];
     fgets(inputedColumnNames, MaxColumnNameLenght*MaxNumberOfColumns+MaxNumberOfColumns, stdin);
     fflush(stdin); // clear input stream
-
 
     // remove Enter
     inputedTableName[strlen(inputedTableName) - 1] = '\0';
@@ -291,19 +278,15 @@ int ShowPageOperationsWithSingleTable()
         Page = PageAddRow;
         break;
     case 3:
-        //Edit, remove or move columns
-        PrintListOfColumns();
-        break;
-    case 4:
         Page = PageRenameTable;
         break;
-    case 5:
+    case 4:
         Page = PageMoveTable;
         break;
-    case 6:
+    case 5:
         Page = PageAddColumn;
         break;
-     case 7:
+    case 6:
         DeleteTable(FindTablePositionByIndex(SelectedTableIndex));
         Page = PageOperationsWithTables;
         break;
