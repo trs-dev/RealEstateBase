@@ -16,9 +16,9 @@ char* TextEditTableTips = " Press arrow keys to navigate; Ctrl + E - Edit entry;
 char* TextViewTableTips = " Press arrow keys to navigate;\n Ctrl + Z - Return.\n";
 
 char* TextTableName = "Table name: ";
-char* TextColumnNames = "Column names: ";
+char* TextColumnNames = "Column names (separated by comma): ";
 char* TextColumnName = "Column name: ";
-char* TextRowRecords = "Enter row records: ";
+char* TextRowRecords = "Enter row records(separated by comma): ";
 char* TextNewValue = "Enter new value: ";
 char* TextNewColumnName = "Enter new column name: ";
 char* TextEnterSelectCommand = "Enter SELECT command. \nSyntax: SELECT ColumnName1, ColumnName2... or * FROM TableName1 JOIN TableName2 ON Table1Column = Table2Column\n        WHERE ColumName1 ><= Value1 AND ColumnName2 ><= Value2 ORDER BY ColumnName1 ASC/DESC, ColumnName2 ASC/DESC, ...\n";
