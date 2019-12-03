@@ -382,6 +382,7 @@ void ShowFilteredTable(int CurrentColumn, int CurrentRow, int StartFromColumn, i
         printf("|\n");
     }
     PrintLine('=',currentTableWidth+1);
+    printf(TextViewTableTips);
 }
 
 void DisplayFilteredTable()

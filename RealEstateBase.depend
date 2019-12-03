@@ -10,7 +10,7 @@
 	"commands.h"
 	"navigate.h"
 
-1575390135 c:\dropbox\c_projects\realestatebase\resources.h
+1575391652 c:\dropbox\c_projects\realestatebase\resources.h
 
 1575389978 source:c:\dropbox\c_projects\realestatebase\resources.c
 	<stdio.h>
@@ -81,7 +81,7 @@
 
 1573978179 c:\dropbox\c_projects\realestatebase\menu.h
 
-1575389410 source:c:\dropbox\c_projects\realestatebase\display.c
+1575391704 source:c:\dropbox\c_projects\realestatebase\display.c
 	<windows.h>
 	<stdio.h>
 	"resources.h"
@@ -90,7 +90,7 @@
 	"filteredtablesdefinition.h"
 	"display.h"
 
-1575390145 source:c:\dropbox\c_projects\realestatebase\navigate.c
+1575390330 source:c:\dropbox\c_projects\realestatebase\navigate.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>

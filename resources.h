@@ -13,6 +13,7 @@ char* TextExit;
 char* TextOperationsWithTables;
 char* TextOperationsWithSingleTable;
 char* TextEditTableTips;
+char* TextViewTableTips;
 
 char* TextTableName;
 char* TextColumnNames;
