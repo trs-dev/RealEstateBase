@@ -1,20 +1,11 @@
 # depslib dependency file v1.0
-1574884155 source:c:\dropbox\c_projects\realestatebase\main.c
-	<stdio.h>
-	<stdlib.h>
-	<ctype.h>
-	<string.h>
+1575732589 source:c:\dropbox\c_projects\realestatebase\main.c
 	"resources.h"
-	"resourcesukr.h"
-	"tablesdefinition.h"
-	"commands.h"
 	"navigate.h"
 
 1575391652 c:\dropbox\c_projects\realestatebase\resources.h
 
-1575392320 source:c:\dropbox\c_projects\realestatebase\resources.c
-	<stdio.h>
-	<stdlib.h>
+1575733826 source:c:\dropbox\c_projects\realestatebase\resources.c
 
 1572909170 source:c:\dropbox\c_projects\realestatebase\resourcesuk.c
 	<stdio.h>
@@ -24,9 +15,7 @@
 
 1572908682 c:\dropbox\c_projects\realestatebase\resourcesuk.h
 
-1574343970 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
-	<stdio.h>
-	<stdlib.h>
+1575734070 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
 	<locale.h>
 	"windows.h"
 	"resources.h"
@@ -60,7 +49,7 @@
 	"windows.h"
 	"resources.h"
 
-1573233747 c:\dropbox\c_projects\realestatebase\commands.h
+1575797927 c:\dropbox\c_projects\realestatebase\commands.h
 
 1572951432 c:\dropbox\c_projects\realestatebase\commands.c
 	<stdio.h>
@@ -71,7 +60,7 @@
 
 1573123097 c:\dropbox\c_projects\realestatebase\tablesdefinition.c
 
-1575284421 c:\dropbox\c_projects\realestatebase\tablesdefinition.h
+1575797499 c:\dropbox\c_projects\realestatebase\tablesdefinition.h
 
 1573978179 source:c:\dropbox\c_projects\realestatebase\menu.c
 	<windows.h>
@@ -90,7 +79,7 @@
 	"filteredtablesdefinition.h"
 	"display.h"
 
-1575390330 source:c:\dropbox\c_projects\realestatebase\navigate.c
+1575737320 source:c:\dropbox\c_projects\realestatebase\navigate.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -101,7 +90,7 @@
 	"commands.h"
 	"navigate.h"
 
-1574367769 c:\dropbox\c_projects\realestatebase\navigate.h
+1575737347 c:\dropbox\c_projects\realestatebase\navigate.h
 
 1575390088 source:c:\dropbox\c_projects\realestatebase\displaycommands.c
 	<stdio.h>
@@ -112,7 +101,7 @@
 	"filteredtablesdefinition.h"
 	"display.h"
 
-1575285223 c:\dropbox\c_projects\realestatebase\display.h
+1575800945 c:\dropbox\c_projects\realestatebase\display.h
 
 1575285344 source:c:\dropbox\c_projects\realestatebase\filteredtablesdefinition.c
 	"tablesdefinition.h"

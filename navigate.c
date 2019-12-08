@@ -9,14 +9,9 @@
 #include "commands.h"
 #include "navigate.h"
 
-
-int MenuIndex; //index of selected menu item
 int SelectedTableIndex; //index of selected table
-
-int Page = PageChangeLanguage;
+enum NavigationPages Page = PageChangeLanguage;
 char* DatabaseName = "DatabaseENG.dat";
-
-
 
 
 int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants, char* AdditionalData)
@@ -34,15 +29,6 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants, char* Additio
         {
             variant = atoi(inputedText);
         }
-         // debug output
-         /*
-        printf("You enter: %d\n", inputedText);
-        printf("variant: %d\n", variant);
-        printf("isdigit: %d\n", isdigit(inputedText[0]));
-        printf("variant > 0: %d\n", variant > 0);
-        printf("variant <= NumberOfVariants: %d\n", variant <= NumberOfVariants);
-        */
-
         if (variant >= 0 && variant <= NumberOfVariants) //if all is ok
             return variant;
 
@@ -57,8 +43,6 @@ int ShowNavigationMenu (char* DisplayedText, int NumberOfVariants, char* Additio
         printf(TextInputError);
         printf(DisplayedText, AdditionalData);
     }
-
-
     return 0;
 }
 
@@ -96,20 +80,10 @@ int Navigate () // Navigation function. Otherwise ShowPage functions will newer 
         case PageAddRow:
             ShowPageAddRow();
             break;
-
-
-
-
-
-
-
-
         }
     }
     return 0;
 }
-
-
 
 
 int PrintListOfTables()
@@ -128,52 +102,14 @@ int PrintListOfTables()
                 printf("%d -> %s\n", Tables[tablePosition].Index, Tables[tablePosition].Name);
             }
         }
-
     printf("-----------------------------------------------------------------------\n");
 
     return 0;
 }
-
-int PrintListOfColumns()
-{
-        int tablePosition = FindTablePositionByIndex(SelectedTableIndex);
-        int numberOfColumnsLocal = NumberOfColumns(tablePosition);
-
-
-    printf("-----------------------------------------------------------------------\n");
-        if (numberOfColumnsLocal == 0)
-        {
-            printf(TextNoColumnsInTable);
-        }
-        else
-        {
-            for (int i = 1; i <= numberOfColumnsLocal; i++)
-            {
-                int columnPosition = FindColumnPositionByIndex(tablePosition, i);
-                printf("%d -> %s\n", Tables[tablePosition].Columns[columnPosition].Index, Tables[tablePosition].Columns[columnPosition].Name);
-            }
-        }
-
-    printf("-----------------------------------------------------------------------\n");
-
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 int ShowPageChangeLanguage()
 {
-    MenuIndex = ShowNavigationMenu(TextChangeLanguage, 2, "");
+    int MenuIndex = ShowNavigationMenu(TextChangeLanguage, 2, "");
 
     switch(MenuIndex)
     {
@@ -197,7 +133,7 @@ int ShowPageChangeLanguage()
 
 int ShowPageOperationsWithTables()
 {
-    MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 3, "");
+    int MenuIndex = ShowNavigationMenu(TextOperationsWithTables, 3, "");
 
     switch(MenuIndex)
     {
@@ -252,7 +188,7 @@ int ShowPageSelectTable()
     PrintListOfTables();
 
     printf("0 -> %s\n", TextReturn);
-    MenuIndex = ShowNavigationMenu(TextSelectTable, NumberOfTables(), "");
+    int MenuIndex = ShowNavigationMenu(TextSelectTable, NumberOfTables(), "");
 
     if (MenuIndex>0)
     {
@@ -266,7 +202,7 @@ int ShowPageSelectTable()
 
 int ShowPageOperationsWithSingleTable()
 {
-    MenuIndex = ShowNavigationMenu(TextOperationsWithSingleTable, 6, Tables[FindTablePositionByIndex(SelectedTableIndex)].Name);
+    int MenuIndex = ShowNavigationMenu(TextOperationsWithSingleTable, 6, Tables[FindTablePositionByIndex(SelectedTableIndex)].Name);
 
     switch(MenuIndex)
     {

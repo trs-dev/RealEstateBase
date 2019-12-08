@@ -1,7 +1,6 @@
 #ifndef TABLEDEFINITION_H_INCLUDED
 #define TABLEDEFINITION_H_INCLUDED
 
-
 //define maximum size of database and tables
 #define MaxNumberOfTables 10
 #define MaxNumberOfColumns 10
@@ -49,6 +48,6 @@ int NumberOfTables ();
 int NumberOfColumns (int TablePosition);
 int NumberOfRows (int TablePosition);
 int FindTablePositionByIndex (int TableIndex);
-int FindColumnPositionByIndex (int TableIndex, int ColumnIndex);
+int FindColumnPositionByIndex (int TablePosition, int ColumnIndex);
 
 #endif // TABLEDEFINITION_H_INCLUDED

@@ -120,7 +120,6 @@ int DeleteTable (int TablePosition)
 
     int oldTableIndex = Tables[TablePosition].Index;
 
-    //strcpy(Tables[TablePosition].Name, "\0");
     memset(&Tables[TablePosition], 0, sizeof(Table));
     Tables[TablePosition].Index = 0;
 
