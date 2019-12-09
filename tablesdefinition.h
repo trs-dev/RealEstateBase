@@ -7,8 +7,8 @@
 #define MaxNumberOfRows 100
 
 //define maximum length of cells and names fields
-#define MaxTableNameLenght 20
-#define MaxColumnNameLenght 20
+#define MaxTableNameLenght 50
+#define MaxColumnNameLenght 50
 #define MaxCellTextLenght 100
 #define CellNumericType int
 
