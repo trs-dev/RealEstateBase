@@ -13,13 +13,13 @@ void TranslateToUKR() //
 TextWelcome = "Доброго дня! Вітаємо в базі нерухомого майна.\n";
 
 TextOperationsWithTables = "Операції з таблицями: \n 1 - Показати список таблиць і вибрати таблицю \n 2 - Створити таблицю \n 3 – Виконати вибірку з бази даних (SELECT) \n 0 - Вихід:\n";
-TextOperationsWithSingleTable = "Операції з таблицею [%s]: \n 1 - Відобразити вміст таблиці\n 2 – Додати стовпчик \n 3 - Перейменувати таблицю \n 4 - Перемістити таблицю \n 5 – Додати стовпчик \n 6 - Видалити таблицю \n 0 - Назад:\n";
+TextOperationsWithSingleTable = "Операції з таблицею [%s]: \n 1 - Відобразити вміст таблиці\n 2 – Додати рядок \n 3 - Перейменувати таблицю \n 4 - Перемістити таблицю \n 5 – Додати колонку \n 6 - Видалити таблицю \n 0 - Назад:\n";
 
-TextEditTableTips = " Користуйтеся стрілками для навігації; Ctrl + E – Редагувати поле; Ctrl + X – Видалити рядок; \n Ctrl + WASD – Перемістити стовпчики і рядки; Ctrl + R – Видалити стовпчик; \n Ctrl + Z - Назад.\n";
+TextEditTableTips = " Користуйтеся стрілками для навігації; Ctrl + E – Редагувати поле; Ctrl + X – Видалити рядок; \n Ctrl + WASD – Перемістити стовпчики і рядки; Ctrl + T – Перейменувати колонку; Ctrl + R – Видалити колонку; \n Ctrl + Z - Назад.\n";
 TextViewTableTips = " Користуйтеся стрілками для навігації;\n Ctrl + Z - Назад.\n";
 
 TextTableName = "Назва таблиці: ";
-TextColumnNames = "Стовпці таблиці (через кому): ";
+TextColumnNames = "Колонки таблиці (через кому): ";
 TextColumnName = "Назва стовпця: ";
 TextRowRecords= "Введіть дані записів (через кому): ";
 TextNewValue = "Введіть нове значення: ";
@@ -38,11 +38,11 @@ TextDeleteTableSuccess = "Таблицю [%s] успішно видалено.\n";
 TextRenameTableSuccess = "Таблицю [%s] перейменовано в [%s].\n";
 
 TextNoColumnsInTable = "В таблиці відсутні стовпці.\n";
-TextTooManyColumns = "В таблиці створено максимальну кількість стовпців.\n";
+TextTooManyColumns = "В таблиці створено максимальну кількість колонок.\n";
 
-TextCreateColumnSuccess = "Стовпець [%s] успішно створено.\n";
-TextDeleteColumnSuccess = "Стовпець [%s] успішно видалено.\n";
-TextRenameColumnSuccess = "Стовпець [%s] перейменовано в [%s].\n";
+TextCreateColumnSuccess = "Колонку [%s] успішно створено.\n";
+TextDeleteColumnSuccess = "Колонку [%s] успішно видалено.\n";
+TextRenameColumnSuccess = "Колонку [%s] перейменовано в [%s].\n";
 
 TextTooManyRows = "В таблиці створено максимальну кількість рядків.\n";
 TextCreateRowSuccess = "Новий рядок успішно створено.\n";
