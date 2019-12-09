@@ -4,7 +4,7 @@ char* TextChangeLanguage = "Choose your language: \n 1 - English\n 2 - Ukrainian
 char* TextOperationsWithTables = "Operations with tables: \n 1 - Show tables list and choose table\n 2 - Add new table \n 3 - Execute SELECT database command \n 0 - Exit:\n";
 char* TextOperationsWithSingleTable = "Operations with table [%s]: \n 1 - Display all data\n 2 - Add row \n 3 - Rename table \n 4 - Move table \n 5 - Add columns \n 6 - Delete table \n 0 - Return:\n";
 
-char* TextEditTableTips = " Press arrow keys to navigate; Ctrl + E - Edit entry; Ctrl + X - Remove row; \n Ctrl + WASD - Move columns and rows; Ctrl + R - Remove column; \n Ctrl + Z - Return.\n";
+char* TextEditTableTips = " Press arrow keys to navigate; Ctrl + E - Edit entry; Ctrl + X - Remove row; \n Ctrl + WASD - Move columns and rows; Ctrl + T - Rename column; Ctrl + R - Remove column; \n Ctrl + Z - Return.\n";
 char* TextViewTableTips = " Press arrow keys to navigate;\n Ctrl + Z - Return.\n";
 
 char* TextTableName = "Table name: ";
