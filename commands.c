@@ -34,29 +34,20 @@ int SaveDB (char* FileName)
 int OpenDB (char* FileName)
 {
     FILE * fp;
-    char *c;
-    int i;
-    int *pti = (int *)malloc(sizeof(int));
+    double i;
 
     if ((fp = fopen(FileName, "r")) == NULL)
     {
         perror(TextOpenFileError);
         return 1;
     }
-        c = (char *)Tables;
-    while ((i= getc(fp))!=EOF)
-    {
-        *c = i;
-        c++;
-    }
 
-    free(pti);
+    int fileSize = MaxNumberOfTables * sizeof(struct Table);
+    fread(Tables, fileSize, 1, fp);
+
     fclose(fp);
     return 0;
 }
-
-
-
 
 //Tables Commands
 int CanCreateTable ()

@@ -5,7 +5,7 @@
 
 1575391652 c:\dropbox\c_projects\realestatebase\resources.h
 
-1575733826 source:c:\dropbox\c_projects\realestatebase\resources.c
+1575882895 source:c:\dropbox\c_projects\realestatebase\resources.c
 
 1572909170 source:c:\dropbox\c_projects\realestatebase\resourcesuk.c
 	<stdio.h>
@@ -15,7 +15,7 @@
 
 1572908682 c:\dropbox\c_projects\realestatebase\resourcesuk.h
 
-1575734070 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
+1575898351 source:c:\dropbox\c_projects\realestatebase\resourcesukr.c
 	<locale.h>
 	"windows.h"
 	"resources.h"
@@ -31,7 +31,7 @@
 
 1573154036 c:\dropbox\c_projects\realestatebase\resourcesukr.h
 
-1575053016 source:c:\dropbox\c_projects\realestatebase\commands.c
+1575895635 source:c:\dropbox\c_projects\realestatebase\commands.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -60,7 +60,7 @@
 
 1573123097 c:\dropbox\c_projects\realestatebase\tablesdefinition.c
 
-1575797499 c:\dropbox\c_projects\realestatebase\tablesdefinition.h
+1575883371 c:\dropbox\c_projects\realestatebase\tablesdefinition.h
 
 1573978179 source:c:\dropbox\c_projects\realestatebase\menu.c
 	<windows.h>
@@ -70,7 +70,7 @@
 
 1573978179 c:\dropbox\c_projects\realestatebase\menu.h
 
-1575391704 source:c:\dropbox\c_projects\realestatebase\display.c
+1575801763 source:c:\dropbox\c_projects\realestatebase\display.c
 	<windows.h>
 	<stdio.h>
 	"resources.h"
